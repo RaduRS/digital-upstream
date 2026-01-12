@@ -4,7 +4,7 @@ import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ThemeScroll from "@/components/ThemeScroll";
+import HomeThemeScroll from "@/components/HomeThemeScroll";
 
 const jakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -98,21 +98,7 @@ export default function RootLayout({
       <body
         className={`${jakartaSans.variable} ${geistMono.variable} min-h-screen bg-background text-foreground antialiased font-sans`}
       >
-        <ThemeScroll
-          targetSelector="#black-section"
-          startVh={0.6}
-          endVh={0.68}
-          maxPercent={100}
-        />
-        {/* Reverse: lighten back from black to white approaching Section 4 */}
-        <ThemeScroll
-          targetSelector="#projects"
-          rangePx={100}
-          offsetPx={-520}
-          fromPercent={100}
-          toPercent={0}
-          applyBeforeStart={false}
-        />
+        <HomeThemeScroll />
         <a
           href="#content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 rounded px-3 py-2 bg-primary text-primary-foreground"
