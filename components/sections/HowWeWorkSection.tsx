@@ -1,5 +1,3 @@
-"use client";
-
 import { Hexagon, Compass, PenTool, Code2 } from "lucide-react";
 import Container from "@/components/Container";
 import Parallax from "@/components/Parallax";

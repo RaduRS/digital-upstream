@@ -1,5 +1,3 @@
-"use client";
-
 import { Diamond } from "lucide-react";
 import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";

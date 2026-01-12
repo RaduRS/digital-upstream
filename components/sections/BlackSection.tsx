@@ -1,5 +1,3 @@
-"use client";
-
 import { Asterisk } from "lucide-react";
 import Container from "@/components/Container";
 import Parallax from "@/components/Parallax";
