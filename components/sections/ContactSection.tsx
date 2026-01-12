@@ -35,7 +35,7 @@ export default function ContactSection() {
             <Parallax strength={0.08} maxTranslate={24}>
               <div className="mt-12 sm:mt-16 w-full flex flex-row items-center justify-between sm:justify-start gap-4 sm:gap-6">
                 <Link
-                  href="mailto:hello@digitalupstream.com"
+                  href="mailto:contact@digital-upstream.com"
                   className="inline-flex items-center justify-center rounded-md border border-foreground/15 px-5 py-3 text-lg sm:text-xl font-medium hover:border-foreground/30 transition-colors"
                   aria-label="Email Digital Upstream"
                 >

@@ -310,7 +310,7 @@ export default function ProjectsSection() {
               "@type": "ListItem",
               position: i + 1,
               name: p.title,
-              url: `https://digitalupstream.com${p.href}`,
+              url: `https://digital-upstream.com${p.href}`,
               description: p.desc,
             })),
           })}

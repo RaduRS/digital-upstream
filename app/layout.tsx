@@ -19,18 +19,23 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://digitalupstream.com"),
+  metadataBase: new URL("https://digital-upstream.com"),
   title: {
     default: "Digital Upstream",
     template: "%s | Digital Upstream",
   },
   description: "Professional web development portfolio and services.",
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/digital-upstream-logo.svg", type: "image/svg+xml" },
+      { url: "/digital-upstream-logo.png", type: "image/png" },
+    ],
+    apple: [{ url: "/digital-upstream-logo.png", type: "image/png" }],
   },
   alternates: {
     canonical: "/",
   },
+  manifest: "/manifest.webmanifest",
   robots: {
     index: true,
     follow: true,
@@ -57,7 +62,7 @@ export const metadata: Metadata = {
     title: "Digital Upstream",
     description: "Professional web development portfolio and services.",
     siteName: "Digital Upstream",
-    url: "https://digitalupstream.com/",
+    url: "https://digital-upstream.com/",
     images: [
       {
         url: "/digital-upstream-logo.png",
@@ -122,13 +127,13 @@ export default function RootLayout({
             "@context": "https://schema.org",
             "@type": "Organization",
             name: "Digital Upstream",
-            url: "https://digitalupstream.com",
-            logo: "https://digitalupstream.com/digital-upstream-logo.png",
+            url: "https://digital-upstream.com",
+            logo: "https://digital-upstream.com/digital-upstream-logo.png",
             sameAs: [],
             contactPoint: [
               {
                 "@type": "ContactPoint",
-                email: "hello@digitalupstream.com",
+                email: "contact@digital-upstream.com",
                 contactType: "customer service",
                 availableLanguage: ["en"],
               },
@@ -141,10 +146,10 @@ export default function RootLayout({
             "@context": "https://schema.org",
             "@type": "WebSite",
             name: "Digital Upstream",
-            url: "https://digitalupstream.com",
+            url: "https://digital-upstream.com",
             potentialAction: {
               "@type": "SearchAction",
-              target: "https://digitalupstream.com/?q={search_term_string}",
+              target: "https://digital-upstream.com/?q={search_term_string}",
               "query-input": "required name=search_term_string",
             },
           })}

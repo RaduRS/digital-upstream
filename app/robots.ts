@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const host = "https://digitalupstream.com";
+  const host = "https://digital-upstream.com";
   return {
     rules: [{ userAgent: "*", allow: "/" }],
     sitemap: `${host}/sitemap.xml`,
