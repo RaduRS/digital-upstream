@@ -10,12 +10,12 @@ interface LogoProps {
 export default function Logo({ className, alt = "Digital Upstream logo", priority = false }: LogoProps) {
   return (
     <Image
-      src="/digital-upstream-logo.png"
+      src="/digital-upstream-logo.svg"
       alt={alt}
       width={814}
       height={279}
       priority={priority}
-      sizes="100vw"
+      sizes="(max-width: 768px) 160px, 256px"
       className={cn("w-full h-auto select-none", className)}
       draggable={false}
     />

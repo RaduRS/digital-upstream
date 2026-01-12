@@ -1,124 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Calendar, MessagesSquare, Utensils, Video } from "lucide-react";
+import { Utensils } from "lucide-react";
 import Container from "@/components/Container";
 import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
 import DGLabel from "@/components/sections/DGLabel";
 import SectionHeading from "@/components/sections/SectionHeading";
-
-type Project = {
-  title: string;
-  subtitle: string;
-  overview: string;
-  problemSolved?: string[];
-  targetUser?: string;
-  highlights?: string[];
-  techStack?: string[];
-  label?: string;
-  Icon?: typeof Utensils;
-};
-
-const PROJECTS: Record<string, Project> = {
-  freshmeal: {
-    title: "FreshMeal",
-    subtitle: "Smart pantry + recipe suggestions (mobile-first PWA).",
-    overview:
-      "FreshMeal helps you discover healthy recipes based on ingredients you already have. Build a pantry by scanning barcodes or taking photos, then get AI-assisted recipe suggestions you can filter by meal type, servings, and dietary preferences.",
-    problemSolved: [
-      "Eliminates the friction of “what can I cook right now?”",
-      "Reduces food waste by tracking pantry inventory and expiry dates",
-      "Promotes healthy eating through practical, ingredient-aware suggestions",
-      "Makes shopping smarter by surfacing missing ingredients",
-    ],
-    targetUser:
-      "Single user (personal use), health-conscious, wants practical tools that fit naturally into daily cooking routines.",
-    highlights: [
-      "Barcode scanning and photo capture to add pantry items",
-      "Pantry inventory with quantities and expiry tracking",
-      "Recipe suggestions driven by available ingredients",
-      "Filters: meal type, servings, dietary preferences",
-      "Shopping list built from missing ingredients",
-    ],
-    techStack: ["PWA", "Mobile-first UI", "AI-assisted recommendations"],
-    label: "CASE‑01",
-    Icon: Utensils,
-  },
-  automan: {
-    title: "Automan",
-    subtitle: "Automated content pipeline: URL → new video → publish.",
-    overview:
-      "Automan automates the process of taking a TikTok URL (and optionally additional URLs), extracting audio, generating a new avatar video via AI, and publishing it to multiple social platforms using SocialBee.",
-    highlights: [
-      "Accepts 1–3 TikTok URLs per job",
-      "Audio extraction and transcription",
-      "AI script generation and scene breakdown",
-      "Avatar video generation",
-      "Scheduling and publishing to multiple platforms",
-    ],
-    techStack: [
-      "Next.js (App Router) + TypeScript",
-      "Supabase (jobs, state, metadata)",
-      "Cloudinary (storage + transformations)",
-      "Deepgram (speech-to-text)",
-      "OpenAI API (script + structure)",
-      "HeyGen (avatar video generation)",
-      "SocialBee (publishing)",
-    ],
-    label: "CASE‑02",
-    Icon: Video,
-  },
-  "chat-smith": {
-    title: "Chat-Smith",
-    subtitle: "Multi-tenant RAG chatbot platform for client websites.",
-    overview:
-      "Chat-Smith is a multi-tenant SaaS platform for creating and managing AI-powered RAG chatbots across multiple clients. Clients upload documents, customize the bot, and embed it on their site. Admin manages tenants, usage, and templates.",
-    highlights: [
-      "Two dashboards: admin (/admin) and client (/dashboard)",
-      "Per-tenant document upload and knowledge base isolation",
-      "Embeddable chatbot widget with customization",
-      "RAG pipeline for grounded answers from client documents",
-      "Tenant-level analytics and management controls",
-    ],
-    techStack: [
-      "Next.js (App Router) + TypeScript",
-      "Multi-tenant auth + tenant isolation",
-      "Vector search + RAG pipeline",
-      "Embeddable widget",
-    ],
-    label: "CASE‑03",
-    Icon: MessagesSquare,
-  },
-  vocalenda: {
-    title: "Vocalenda",
-    subtitle: "Multi-tenant voice booking with Google Calendar + SMS.",
-    overview:
-      "Vocalenda gives each business a dedicated Twilio phone number where callers speak naturally with an AI agent. The agent answers business questions from stored configuration and books/reschedules/cancels on the business’s Google Calendar, then sends SMS confirmations from the same number.",
-    highlights: [
-      "Dedicated Twilio number per business (multi-tenant)",
-      "AI voice agent with real-time audio streaming",
-      "Google Calendar booking/reschedule/cancel",
-      "SMS confirmations and reminders",
-      "Business config + knowledge for Q&A",
-    ],
-    techStack: [
-      "Next.js (App Router) for UI + APIs",
-      "Clerk (auth)",
-      "Supabase (Postgres + Storage + RLS)",
-      "Twilio (Voice + Messaging)",
-      "Google Calendar OAuth per business",
-      "OpenAI (tool-calling dialog)",
-      "Deepgram (real-time ASR)",
-      "Stripe (subscriptions)",
-    ],
-    label: "CASE‑04",
-    Icon: Calendar,
-  },
-};
+import { PROJECT_DETAILS, PROJECT_ICON } from "@/lib/projects";
 
 export function generateStaticParams() {
-  return Object.keys(PROJECTS).map((slug) => ({ slug }));
+  return Object.keys(PROJECT_DETAILS).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -127,7 +19,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const project = PROJECTS[slug];
+  const project = PROJECT_DETAILS[slug];
   if (!project) return {};
   return {
     title: project.title,
@@ -142,10 +34,10 @@ export default async function ProjectPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const project = PROJECTS[slug];
+  const project = PROJECT_DETAILS[slug];
   if (!project) notFound();
 
-  const Icon = project.Icon ?? Utensils;
+  const Icon = PROJECT_ICON[project.iconName] ?? Utensils;
 
   return (
     <main className="min-h-screen">

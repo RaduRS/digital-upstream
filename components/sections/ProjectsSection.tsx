@@ -4,39 +4,18 @@ import Link from "next/link";
 import Script from "next/script";
 import type { MouseEvent } from "react";
 import { useEffect, useRef } from "react";
-import { FolderOpen, Globe, FileText, Wind } from "lucide-react";
+import { FolderOpen } from "lucide-react";
 import Container from "@/components/Container";
 import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
 import DGLabel from "./DGLabel";
 import SectionHeading from "./SectionHeading";
+import { PROJECT_ICON, PROJECTS_FEATURED } from "@/lib/projects";
 
-const projects = [
-  {
-    href: "/projects/freshmeal",
-    title: "FreshMeal",
-    desc: "Smart pantry + recipe suggestions (PWA)",
-    Icon: Globe,
-  },
-  {
-    href: "/projects/vocalenda",
-    title: "Vocalenda",
-    desc: "Multi-tenant voice booking + calendar automation",
-    Icon: FileText,
-  },
-  {
-    href: "/projects/automan",
-    title: "Automan",
-    desc: "Automated content pipeline and publishing",
-    Icon: Wind,
-  },
-  {
-    href: "/projects/chat-smith",
-    title: "Chat-Smith",
-    desc: "Multi-tenant RAG chatbot platform",
-    Icon: FolderOpen,
-  },
-];
+const projects = PROJECTS_FEATURED.map((p) => ({
+  ...p,
+  Icon: PROJECT_ICON[p.iconName],
+}));
 
 export default function ProjectsSection() {
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -300,6 +279,18 @@ export default function ProjectsSection() {
                 </div>
               </div>
             </Parallax>
+          </Reveal>
+
+          <Reveal delay={240}>
+            <div className="mt-8 sm:mt-10 flex justify-end text-right">
+              <Link
+                href="/projects"
+                className="link-underline-hide-ltr link-underline-tight text-lg sm:text-xl text-foreground/80 hover:text-foreground transition-colors"
+                aria-label="Open all projects"
+              >
+                View all projects
+              </Link>
+            </div>
           </Reveal>
         </div>
         <Script id="projects-itemlist-jsonld" type="application/ld+json">

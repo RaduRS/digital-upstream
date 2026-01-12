@@ -11,18 +11,24 @@ export default function Header() {
           className="flex items-start gap-2 w-32 sm:w-40 md:w-64"
           aria-label="Digital Upstream logo"
         >
-          <Logo className="p-1 sm:p-2" />
+          <Logo className="p-1 sm:p-2" priority />
           <span className="sr-only">Digital Upstream</span>
         </Link>
         <nav aria-label="Primary">
           <ul className="flex items-center gap-6">
             <li>
-              <Link href="#projects" className="link-underline-rtl text-lg sm:text-xl text-foreground/80 hover:text-foreground transition-colors">
+              <Link
+                href="/projects"
+                className="link-underline-rtl text-lg sm:text-xl text-foreground/80 hover:text-foreground transition-colors"
+              >
                 Projects
               </Link>
             </li>
             <li>
-              <Link href="#contact" className="link-underline-rtl text-lg sm:text-xl text-foreground/80 hover:text-foreground transition-colors">
+              <Link
+                href="#contact"
+                className="link-underline-rtl text-lg sm:text-xl text-foreground/80 hover:text-foreground transition-colors"
+              >
                 Contact
               </Link>
             </li>
