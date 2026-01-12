@@ -68,93 +68,91 @@ export default async function ProjectPage({
 
             <Reveal delay={120}>
               <Parallax strength={0.06} maxTranslate={18}>
-                <div className="mt-10 sm:mt-14 symbiote-card rounded-xl border border-foreground/10 p-5 sm:p-7 lg:p-10">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
-                    <div className="lg:col-span-7">
-                      <div className="space-y-4">
+                <div className="mt-10 sm:mt-14 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+                  <div className="lg:col-span-7">
+                    <div className="space-y-4">
+                      <h2 className="text-sm tracking-wide uppercase text-foreground/60">
+                        Overview
+                      </h2>
+                      <p className="text-lg sm:text-xl leading-relaxed text-foreground/80">
+                        {project.overview}
+                      </p>
+                    </div>
+
+                    {project.problemSolved &&
+                    project.problemSolved.length > 0 ? (
+                      <div className="mt-10 sm:mt-12">
                         <h2 className="text-sm tracking-wide uppercase text-foreground/60">
-                          Overview
+                          Core Problem Solved
                         </h2>
-                        <p className="text-lg sm:text-xl leading-relaxed text-foreground/80">
-                          {project.overview}
+                        <ul className="mt-4 space-y-2 text-base sm:text-lg text-foreground/75">
+                          {project.problemSolved.map((item) => (
+                            <li key={item} className="flex gap-3">
+                              <span
+                                className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground/40"
+                                aria-hidden="true"
+                              />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ) : null}
+
+                    {project.targetUser ? (
+                      <div className="mt-10 sm:mt-12">
+                        <h2 className="text-sm tracking-wide uppercase text-foreground/60">
+                          Target User
+                        </h2>
+                        <p className="mt-4 text-base sm:text-lg text-foreground/75 leading-relaxed">
+                          {project.targetUser}
                         </p>
                       </div>
+                    ) : null}
+                  </div>
 
-                      {project.problemSolved &&
-                      project.problemSolved.length > 0 ? (
-                        <div className="mt-10 sm:mt-12">
-                          <h2 className="text-sm tracking-wide uppercase text-foreground/60">
-                            Core Problem Solved
-                          </h2>
-                          <ul className="mt-4 space-y-2 text-base sm:text-lg text-foreground/75">
-                            {project.problemSolved.map((item) => (
-                              <li key={item} className="flex gap-3">
-                                <span
-                                  className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground/40"
-                                  aria-hidden="true"
-                                />
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ) : null}
-
-                      {project.targetUser ? (
-                        <div className="mt-10 sm:mt-12">
-                          <h2 className="text-sm tracking-wide uppercase text-foreground/60">
-                            Target User
-                          </h2>
-                          <p className="mt-4 text-base sm:text-lg text-foreground/75 leading-relaxed">
-                            {project.targetUser}
-                          </p>
-                        </div>
-                      ) : null}
+                  <div className="lg:col-span-5">
+                    <div className="rounded-lg border border-foreground/10 bg-background/40 p-4 sm:p-5">
+                      <h2 className="text-sm tracking-wide uppercase text-foreground/60">
+                        Key Features
+                      </h2>
+                      {project.highlights && project.highlights.length > 0 ? (
+                        <ul className="mt-4 space-y-2 text-base text-foreground/75">
+                          {project.highlights.map((item) => (
+                            <li key={item} className="flex gap-3">
+                              <span
+                                className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground/40"
+                                aria-hidden="true"
+                              />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      ) : (
+                        <p className="mt-4 text-base text-foreground/70">
+                          Add feature highlights here.
+                        </p>
+                      )}
                     </div>
 
-                    <div className="lg:col-span-5">
-                      <div className="rounded-lg border border-foreground/10 bg-background/40 p-4 sm:p-5">
+                    {project.techStack && project.techStack.length > 0 ? (
+                      <div className="mt-6 rounded-lg border border-foreground/10 bg-background/40 p-4 sm:p-5">
                         <h2 className="text-sm tracking-wide uppercase text-foreground/60">
-                          Key Features
+                          Tech Stack
                         </h2>
-                        {project.highlights && project.highlights.length > 0 ? (
-                          <ul className="mt-4 space-y-2 text-base text-foreground/75">
-                            {project.highlights.map((item) => (
-                              <li key={item} className="flex gap-3">
-                                <span
-                                  className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground/40"
-                                  aria-hidden="true"
-                                />
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : (
-                          <p className="mt-4 text-base text-foreground/70">
-                            Add feature highlights here.
-                          </p>
-                        )}
+                        <ul className="mt-4 space-y-2 text-base text-foreground/75">
+                          {project.techStack.map((item) => (
+                            <li key={item} className="flex gap-3">
+                              <span
+                                className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground/40"
+                                aria-hidden="true"
+                              />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
                       </div>
-
-                      {project.techStack && project.techStack.length > 0 ? (
-                        <div className="mt-6 rounded-lg border border-foreground/10 bg-background/40 p-4 sm:p-5">
-                          <h2 className="text-sm tracking-wide uppercase text-foreground/60">
-                            Tech Stack
-                          </h2>
-                          <ul className="mt-4 space-y-2 text-base text-foreground/75">
-                            {project.techStack.map((item) => (
-                              <li key={item} className="flex gap-3">
-                                <span
-                                  className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground/40"
-                                  aria-hidden="true"
-                                />
-                                <span>{item}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ) : null}
-                    </div>
+                    ) : null}
                   </div>
                 </div>
               </Parallax>

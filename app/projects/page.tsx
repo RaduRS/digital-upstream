@@ -22,7 +22,11 @@ export default function ProjectsPage() {
       <section className="py-24 sm:py-32">
         <Container>
           <div className="max-w-6xl mx-auto w-full">
-            <DGLabel Icon={FolderOpen} label="DU‑PROJECTS" className="text-foreground/70" />
+            <DGLabel
+              Icon={FolderOpen}
+              label="DU‑PROJECTS"
+              className="text-foreground/70"
+            />
 
             <Reveal>
               <Parallax strength={0.1} maxTranslate={28}>
@@ -39,8 +43,8 @@ export default function ProjectsPage() {
 
             <Reveal delay={120}>
               <Parallax strength={0.08} maxTranslate={24}>
-                <div className="mt-10 sm:mt-14 symbiote-card rounded-xl border border-foreground/10 p-5 sm:p-7 lg:p-10">
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+                <div className="mt-10 sm:mt-14">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14">
                     <div className="lg:col-span-7">
                       <h2 className="text-sm tracking-wide uppercase text-foreground/60">
                         Featured
@@ -58,7 +62,10 @@ export default function ProjectsPage() {
                               <div className="flex items-start justify-between gap-6">
                                 <div>
                                   <div className="flex items-center gap-3">
-                                    <Icon className="h-5 w-5 opacity-80" aria-hidden={true} />
+                                    <Icon
+                                      className="h-5 w-5 opacity-80"
+                                      aria-hidden={true}
+                                    />
                                     <h3 className="text-xl sm:text-2xl font-semibold tracking-tight">
                                       {p.title}
                                     </h3>
@@ -92,7 +99,10 @@ export default function ProjectsPage() {
                               aria-label={`Open ${p.title} details`}
                             >
                               <div className="flex items-center gap-3">
-                                <Icon className="h-4 w-4 opacity-80" aria-hidden={true} />
+                                <Icon
+                                  className="h-4 w-4 opacity-80"
+                                  aria-hidden={true}
+                                />
                                 <div>
                                   <p className="text-base font-medium leading-none">
                                     {p.title}
@@ -129,4 +139,3 @@ export default function ProjectsPage() {
     </main>
   );
 }
-
