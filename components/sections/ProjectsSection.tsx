@@ -13,27 +13,27 @@ import SectionHeading from "./SectionHeading";
 
 const projects = [
   {
-    href: "/projects/project-1",
-    title: "Project One",
-    desc: "Brand site and CMS",
+    href: "/projects/freshmeal",
+    title: "FreshMeal",
+    desc: "Smart pantry + recipe suggestions (PWA)",
     Icon: Globe,
   },
   {
-    href: "/projects/project-2",
-    title: "Project Two",
-    desc: "Docs and knowledge base",
+    href: "/projects/vocalenda",
+    title: "Vocalenda",
+    desc: "Multi-tenant voice booking + calendar automation",
     Icon: FileText,
   },
   {
-    href: "/projects/project-3",
-    title: "Project Three",
-    desc: "Interactive dashboard",
+    href: "/projects/automan",
+    title: "Automan",
+    desc: "Automated content pipeline and publishing",
     Icon: Wind,
   },
   {
-    href: "/projects/project-4",
-    title: "Project Four",
-    desc: "Component library",
+    href: "/projects/chat-smith",
+    title: "Chat-Smith",
+    desc: "Multi-tenant RAG chatbot platform",
     Icon: FolderOpen,
   },
 ];
@@ -130,7 +130,7 @@ export default function ProjectsSection() {
       className="h-screen flex items-center"
       aria-labelledby="projects-title"
     >
-      <Container className="max-w-8xl">
+      <Container>
         <div className="mx-auto w-full text-left">
           <DGLabel
             Icon={FolderOpen}
@@ -140,11 +140,13 @@ export default function ProjectsSection() {
 
           <Reveal>
             <Parallax strength={0.1} maxTranslate={28}>
-              <SectionHeading
-                title="Showcase"
-                subtitle="Recent collaborations."
-                id="projects-title"
-              />
+              <div className="max-w-2xl">
+                <SectionHeading
+                  title="Showcase"
+                  subtitle="Recent collaborations."
+                  id="projects-title"
+                />
+              </div>
             </Parallax>
           </Reveal>
 
