@@ -101,7 +101,6 @@ export default function ProjectsSection() {
       const speed2 = reduceMotion ? 0 : 0.0026; // ms
       const waves = 72; // fewer segments to emphasize corners
       // No hard stroke — gradient edge is handled via blurred SVG overlays
-      // No hard stroke — gradient edge is handled via blurred SVG overlays
 
       // Build the same path for SVG overlays so the inner area follows the ring
       const path = buildSharpPath(
@@ -317,34 +316,6 @@ export default function ProjectsSection() {
       </Container>
     </section>
   );
-}
-
-/** Build an SVG path string that mirrors the wobbling circle */
-function buildPath(
-  cx: number,
-  cy: number,
-  baseR: number,
-  a1: number,
-  a2: number,
-  speed1: number,
-  speed2: number,
-  waves: number,
-  time: number
-) {
-  let d = "";
-  for (let i = 0; i <= waves; i++) {
-    const t = (i / waves) * Math.PI * 2;
-    const wobble =
-      a1 * Math.sin(3 * t + time * speed1) +
-      a2 * Math.sin(5 * t + time * speed2);
-    const r = baseR + wobble;
-    const x = cx + r * Math.cos(t);
-    const y = cy + r * Math.sin(t);
-    if (i === 0) d += `M ${x} ${y}`;
-    else d += ` L ${x} ${y}`;
-  }
-  d += " Z";
-  return d;
 }
 
 /** Build a path with sharp, jagged edges using triangular waves for spikes */
