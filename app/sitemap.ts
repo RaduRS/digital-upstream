@@ -41,25 +41,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${base}/projects/placeholder-1`,
+      url: `${base}/projects/famlymemo`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
-      url: `${base}/projects/placeholder-2`,
+      url: `${base}/projects/valid-spark`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
-      url: `${base}/projects/placeholder-3`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${base}/projects/placeholder-4`,
+      url: `${base}/projects/summaraize`,
       lastModified: now,
       changeFrequency: "monthly",
       priority: 0.6,

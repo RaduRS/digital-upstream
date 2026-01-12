@@ -1,4 +1,13 @@
-import { Calendar, FileText, FolderOpen, Globe, MessagesSquare, Utensils, Video, Wind } from "lucide-react";
+import {
+  Calendar,
+  FileText,
+  FolderOpen,
+  Globe,
+  MessagesSquare,
+  Utensils,
+  Video,
+  Wind,
+} from "lucide-react";
 
 export type ProjectDetail = {
   title: string;
@@ -142,53 +151,131 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     iconName: "messages",
     featured: true,
   },
-  "placeholder-1": {
-    title: "Project Five",
-    subtitle: "Placeholder project (coming soon).",
-    overview: "Details coming soon.",
+  famlymemo: {
+    title: "FamlyMemo",
+    subtitle:
+      "Securely capture and organize your child’s life story—one day at a time.",
+    overview:
+      "FamlyMemo is a private, parent-focused memory vault that helps you store photos, videos, and audio recordings alongside a daily story entry for each date in your child’s life. Instead of losing meaningful moments across camera rolls, chat apps, and random cloud folders, FamlyMemo organizes everything by date so you can always find “that day” again—and eventually gift your child a complete timeline of their journey.",
+    problemSolved: [
+      "Scattered memories across multiple apps and devices, with no single timeline.",
+      "“I can’t find it” searching: filenames are inconsistent and context gets lost.",
+      "Media without meaning: photos/videos lose their story, details, and metadata.",
+      "Privacy and access control: sharing should be intentional and time-limited.",
+      "Longevity: preserving a complete history from birth through adulthood.",
+      "Legacy gifting: turning daily moments into a meaningful, lifelong keepsake.",
+    ],
+    targetUser:
+      "Parents and guardians who want a private, structured memory archive and safe sharing.",
+    highlights: [
+      "Daily timeline organized by date with fast navigation",
+      "Rich story editor for each day",
+      "Media vault for photos, videos, and audio (large files supported)",
+      "Grid, list, and lightbox views with download/delete actions",
+      "Descriptions, tags, and advanced search across media + story text",
+      "Storage-aware plans with usage indicators",
+      "Secure sharing via expiring signed URLs",
+      "Child read-only “legacy” access pattern for gifting later",
+    ],
+    techStack: [
+      "Next.js (App Router) + TypeScript + Tailwind CSS",
+      "Clerk",
+      "GraphQL (Apollo Server + Apollo Client)",
+      "MongoDB (Mongoose)",
+      "AWS S3 + CloudFront signed URLs",
+      "Stripe subscriptions + webhooks",
+    ],
     label: "CASE‑05",
-    iconName: "globe",
-    comingSoon: true,
-  },
-  "placeholder-2": {
-    title: "Project Six",
-    subtitle: "Placeholder project (coming soon).",
-    overview: "Details coming soon.",
-    label: "CASE‑06",
-    iconName: "filetext",
-    comingSoon: true,
-  },
-  "placeholder-3": {
-    title: "Project Seven",
-    subtitle: "Placeholder project (coming soon).",
-    overview: "Details coming soon.",
-    label: "CASE‑07",
-    iconName: "wind",
-    comingSoon: true,
-  },
-  "placeholder-4": {
-    title: "Project Eight",
-    subtitle: "Placeholder project (coming soon).",
-    overview: "Details coming soon.",
-    label: "CASE‑08",
     iconName: "folder",
-    comingSoon: true,
+  },
+  "valid-spark": {
+    title: "Valid Spark",
+    subtitle: "Market research and SaaS idea validation for founders.",
+    overview:
+      "Valid Spark helps founders validate SaaS ideas by turning real-world conversations into a structured market research report. You enter a topic (and optional context), choose data sources, and the app collects evidence, extracts recurring pain points, and synthesizes a report with frequency and TAM-style estimates. Today the product focuses on Reddit + Quora analysis, with an extensible model for additional platforms.",
+    problemSolved: [
+      "Replaces guesswork with evidence from real user discussions",
+      "Surfaces repeatable pain points, not isolated anecdotes",
+      "Quantifies signals (frequency scoring) to prioritize what matters",
+      "Converts messy raw posts into actionable problem statements + sources",
+      "Adds competitive context to guide positioning",
+    ],
+    targetUser:
+      "Indie hackers, early-stage founders, and product teams validating what to build next.",
+    highlights: [
+      "Multi-source research runs (Reddit + Quora)",
+      "AI synthesis into problems with summary, frequency, and TAM estimates",
+      "Evidence-first outputs with sources/links + snippets",
+      "Competitive analysis: competitors, market gaps, entry barriers, differentiation",
+      "Dashboard for reports, problems, and visualizations",
+      "PDF generation + downloads with stored report links",
+      "File uploads attached to reports with signed download URLs",
+      "Subscription + usage credits via Stripe billing",
+    ],
+    techStack: [
+      "Next.js (App Router) + React + TypeScript",
+      "Tailwind CSS + Radix UI primitives",
+      "Clerk",
+      "PostgreSQL + Prisma",
+      "Stripe (checkout + webhooks)",
+      "OpenAI API (analysis + synthesis)",
+      "AWS S3 (uploads + signed URLs)",
+      "Reddit API + Quora via search results",
+      "Recharts + Chart.js",
+    ],
+    label: "CASE‑06",
+    iconName: "globe",
+  },
+  summaraize: {
+    title: "Summaraize",
+    subtitle:
+      "Speech-to-text, document conversion, summarization, and text-to-speech with credits.",
+    overview:
+      "Summaraize is a Next.js application that turns messy, time-consuming inputs (meeting audio, lecture recordings, PDFs, scanned images, long documents) into structured outputs: transcripts, summaries, and natural-sounding audio. It supports voice and document workflows and enforces a credit-based usage model with cost estimation and deduction at API boundaries.",
+    problemSolved: [
+      "Manual transcription is slow and error-prone",
+      "Information overload in long documents",
+      "Paper/scanned content is hard to search",
+      "Accessibility and learning preferences via text-to-speech",
+      "Unpredictable cost and abuse risk in AI apps via credits",
+    ],
+    targetUser:
+      "Students, educators, professionals, creators, and teams needing fast transcription and summaries.",
+    highlights: [
+      "Voice Assistant: record/upload audio → transcribe → summarize → generate AI voice",
+      "Document Converter: PDF/image/text → extract (including OCR) → summarize → generate AI voice",
+      "Provider fallback for summarization (DeepSeek → OpenAI)",
+      "Credit estimation and enforcement at API boundaries",
+      "Stripe checkout + webhooks for credits/subscriptions",
+      "SEO blog with Open Graph, JSON-LD, and sitemap generation",
+      "Analytics integrations gated behind cookie consent where applicable",
+    ],
+    techStack: [
+      "Next.js (App Router) + React + TypeScript",
+      "Tailwind CSS + shadcn/ui (Radix UI primitives)",
+      "Supabase (Auth, Postgres, Storage)",
+      "Stripe (Checkout + Webhooks)",
+      "Deepgram (speech-to-text)",
+      "DeepSeek + OpenAI (summarization + extraction)",
+      "Google Cloud Text-to-Speech",
+    ],
+    label: "CASE‑07",
+    iconName: "filetext",
   },
 };
 
-export const PROJECTS_ALL: ProjectListItem[] = Object.entries(PROJECT_DETAILS).map(
-  ([slug, p]) => ({
-    href: `/projects/${slug}`,
-    slug,
-    title: p.title,
-    desc: p.subtitle,
-    iconName: p.iconName,
-    featured: p.featured,
-    comingSoon: p.comingSoon,
-  })
-);
+export const PROJECTS_ALL: ProjectListItem[] = Object.entries(
+  PROJECT_DETAILS
+).map(([slug, p]) => ({
+  href: `/projects/${slug}`,
+  slug,
+  title: p.title,
+  desc: p.subtitle,
+  iconName: p.iconName,
+  featured: p.featured,
+  comingSoon: p.comingSoon,
+}));
 
 export const PROJECTS_FEATURED: ProjectListItem[] = PROJECTS_ALL.filter(
   (p) => PROJECT_DETAILS[p.slug]?.featured
 );
-
