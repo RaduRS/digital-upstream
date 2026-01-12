@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project: Digital Upstream
 
-## Getting Started
+## 1. Goal
 
-First, run the development server:
+Build a professional portfolio and services website for Digital Upstream, focused on clarity, performance, accessibility, SEO, and responsiveness.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 2. Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Framework: `Next.js` (App Router)
+- Language: `TypeScript`
+- Styling: `Tailwind CSS` (v4)
+- UI: Use `shadcn/ui` components when they add value
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 3. Architecture & Styling
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Tailwind-first: Styling via utility classes in JSX; theme via CSS variables in `app/globals.css`.
+- Fonts: Global sans font is `Plus Jakarta Sans` via `next/font/google` with `display: swap`.
+- Layout: Shared layout renders `Header`, page content, and `Footer`. Skip-to-content link included for accessibility.
+- Assets: The logo lives in `public/digital-upstream-logo.png` and is used by a reusable `Logo` component.
 
-## Learn More
+## 4. Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+- `app/layout.tsx`: Root layout, global fonts, metadata, header/footer, accessibility.
+- `app/page.tsx`: Clean, responsive landing page (hero + placeholder sections).
+- `app/globals.css`: Tailwind imports and CSS variables (light/dark theme, font mapping).
+- `components/Container.tsx`: Consistent responsive page width and padding.
+- `components/Header.tsx`: Accessible header with logo and primary nav.
+- `components/Footer.tsx`: Simple footer with copyright.
+- `components/Logo.tsx`: Logo renderer using the SVG in `public/`.
+- `lib/utils.ts`: `cn` helper for class merging.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 5. Principles & Best Practices
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- DRY: Prefer reusable components (`Container`, `Header`, `Footer`, `Logo`) and utilities.
+- Separation of Concerns: Presentation components are lean; logic lives in hooks/utilities when needed.
+- Type Safety: Strict TypeScript settings enabled.
+- Performance: Font loading uses `swap`; images via `next/image`; minimal client-side JS.
+- Accessibility: Semantic HTML, accessible nav, skip link, alt text, clear focus states.
+- SEO: Meaningful titles/descriptions, Open Graph/Twitter metadata, theme color.
+- Responsive: Mobile-first with Tailwind responsive modifiers; content scales from small to large screens.
 
-## Deploy on Vercel
+## 6. Next Steps
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Add real project data and pages (Projects, Contact).
+- Introduce shadcn/ui components where they simplify UI (buttons, cards, dialogs).
+- Implement a contact form with proper validation and spam protection.
+- Set up content (CMS or static data) for portfolio entries.
