@@ -17,6 +17,7 @@ export type ProjectDetail = {
   targetUser?: string;
   highlights?: string[];
   techStack?: string[];
+  media?: ProjectMediaItem[];
   label?: string;
   iconName:
     | "utensils"
@@ -29,6 +30,13 @@ export type ProjectDetail = {
     | "folder";
   featured?: boolean;
   comingSoon?: boolean;
+};
+
+export type ProjectMediaItem = {
+  kind: "image" | "video";
+  src: `/${string}`;
+  alt: string;
+  label?: string;
 };
 
 export const PROJECT_ICON = {
@@ -65,7 +73,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       "Makes shopping smarter by surfacing missing ingredients",
     ],
     targetUser:
-      "Single user (personal use), health-conscious, wants practical tools that fit naturally into daily cooking routines.",
+      "Users that are health-conscious, wants practical tools that fit naturally into daily cooking routines.",
     highlights: [
       "Barcode scanning and photo capture to add pantry items",
       "Pantry inventory with quantities and expiry tracking",
@@ -74,6 +82,32 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       "Shopping list built from missing ingredients",
     ],
     techStack: ["PWA", "Mobile-first UI", "AI-assisted recommendations"],
+    media: [
+      {
+        kind: "video",
+        src: "/video2.mp4",
+        alt: "FreshMeal demo video placeholder",
+        label: "Demo (placeholder)",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-01.svg",
+        alt: "FreshMeal screenshot placeholder 1",
+        label: "Pantry",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-02.svg",
+        alt: "FreshMeal screenshot placeholder 2",
+        label: "Recipes",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-03.svg",
+        alt: "FreshMeal screenshot placeholder 3",
+        label: "Shopping list",
+      },
+    ],
     label: "CASE‑01",
     iconName: "utensils",
     featured: true,
@@ -100,6 +134,32 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       "Deepgram (real-time ASR)",
       "Stripe (subscriptions)",
     ],
+    media: [
+      {
+        kind: "video",
+        src: "/video2.mp4",
+        alt: "Vocalenda demo video placeholder",
+        label: "Call flow (placeholder)",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-01.svg",
+        alt: "Vocalenda screenshot placeholder 1",
+        label: "Dashboard",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-02.svg",
+        alt: "Vocalenda screenshot placeholder 2",
+        label: "Business config",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-03.svg",
+        alt: "Vocalenda screenshot placeholder 3",
+        label: "Calendar scheduling",
+      },
+    ],
     label: "CASE‑04",
     iconName: "calendar",
     featured: true,
@@ -125,6 +185,32 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       "HeyGen (avatar video generation)",
       "SocialBee (publishing)",
     ],
+    media: [
+      {
+        kind: "video",
+        src: "/video2.mp4",
+        alt: "Automan demo video placeholder",
+        label: "Pipeline run (placeholder)",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-01.svg",
+        alt: "Automan screenshot placeholder 1",
+        label: "Job builder",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-02.svg",
+        alt: "Automan screenshot placeholder 2",
+        label: "Processing stages",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-03.svg",
+        alt: "Automan screenshot placeholder 3",
+        label: "Publishing",
+      },
+    ],
     label: "CASE‑02",
     iconName: "video",
     featured: true,
@@ -146,6 +232,32 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       "Multi-tenant auth + tenant isolation",
       "Vector search + RAG pipeline",
       "Embeddable widget",
+    ],
+    media: [
+      {
+        kind: "video",
+        src: "/video2.mp4",
+        alt: "Chat-Smith demo video placeholder",
+        label: "Widget demo (placeholder)",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-01.svg",
+        alt: "Chat-Smith screenshot placeholder 1",
+        label: "Admin dashboard",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-02.svg",
+        alt: "Chat-Smith screenshot placeholder 2",
+        label: "Knowledge base",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-03.svg",
+        alt: "Chat-Smith screenshot placeholder 3",
+        label: "Embed + customization",
+      },
     ],
     label: "CASE‑03",
     iconName: "messages",
@@ -185,6 +297,32 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       "AWS S3 + CloudFront signed URLs",
       "Stripe subscriptions + webhooks",
     ],
+    media: [
+      {
+        kind: "image",
+        src: "/projects/placeholder-hero.svg",
+        alt: "FamlyMemo hero image placeholder",
+        label: "Hero",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-01.svg",
+        alt: "FamlyMemo screenshot placeholder 1",
+        label: "Daily timeline",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-02.svg",
+        alt: "FamlyMemo screenshot placeholder 2",
+        label: "Story editor",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-03.svg",
+        alt: "FamlyMemo screenshot placeholder 3",
+        label: "Media vault",
+      },
+    ],
     label: "CASE‑05",
     iconName: "folder",
   },
@@ -223,6 +361,32 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       "Reddit API + Quora via search results",
       "Recharts + Chart.js",
     ],
+    media: [
+      {
+        kind: "image",
+        src: "/projects/placeholder-hero.svg",
+        alt: "Valid Spark hero image placeholder",
+        label: "Hero",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-01.svg",
+        alt: "Valid Spark screenshot placeholder 1",
+        label: "Research run",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-02.svg",
+        alt: "Valid Spark screenshot placeholder 2",
+        label: "Problem list",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-03.svg",
+        alt: "Valid Spark screenshot placeholder 3",
+        label: "Report view",
+      },
+    ],
     label: "CASE‑06",
     iconName: "globe",
   },
@@ -258,6 +422,32 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       "Deepgram (speech-to-text)",
       "DeepSeek + OpenAI (summarization + extraction)",
       "Google Cloud Text-to-Speech",
+    ],
+    media: [
+      {
+        kind: "video",
+        src: "/video2.mp4",
+        alt: "Summaraize demo video placeholder",
+        label: "Workflow demo (placeholder)",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-01.svg",
+        alt: "Summaraize screenshot placeholder 1",
+        label: "Voice assistant",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-02.svg",
+        alt: "Summaraize screenshot placeholder 2",
+        label: "Document converter",
+      },
+      {
+        kind: "image",
+        src: "/projects/placeholder-03.svg",
+        alt: "Summaraize screenshot placeholder 3",
+        label: "Summary + audio",
+      },
     ],
     label: "CASE‑07",
     iconName: "filetext",

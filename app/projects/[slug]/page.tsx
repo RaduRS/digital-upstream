@@ -7,6 +7,7 @@ import Parallax from "@/components/Parallax";
 import Reveal from "@/components/Reveal";
 import DGLabel from "@/components/sections/DGLabel";
 import SectionHeading from "@/components/sections/SectionHeading";
+import ProjectMediaPanel from "@/components/ProjectMediaPanel";
 import { PROJECT_DETAILS, PROJECT_ICON } from "@/lib/projects";
 
 export function generateStaticParams() {
@@ -38,6 +39,9 @@ export default async function ProjectPage({
   if (!project) notFound();
 
   const Icon = PROJECT_ICON[project.iconName] ?? Utensils;
+  const media = project.media ?? [];
+  const hero = media.find((m) => m.kind === "video") ?? media[0];
+  const gallery = hero ? media.filter((m) => m !== hero) : media;
 
   return (
     <main className="min-h-screen">
@@ -112,7 +116,15 @@ export default async function ProjectPage({
                   </div>
 
                   <div className="lg:col-span-5">
-                    <div className="rounded-lg border border-foreground/10 bg-background/40 p-4 sm:p-5">
+                    {hero ? (
+                      <ProjectMediaPanel hero={hero} gallery={gallery} />
+                    ) : null}
+
+                    <div
+                      className={`${
+                        hero ? "mt-6" : ""
+                      } rounded-lg border border-foreground/10 bg-background/40 p-4 sm:p-5`}
+                    >
                       <h2 className="text-sm tracking-wide uppercase text-foreground/60">
                         Key Features
                       </h2>
