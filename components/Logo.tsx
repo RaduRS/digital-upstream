@@ -10,7 +10,7 @@ interface LogoProps {
 export default function Logo({ className, alt = "Digital Upstream logo", priority = false }: LogoProps) {
   return (
     <Image
-      src="/digital-upstream-logo.svg"
+      src="/digital-upstream-logo.png"
       alt={alt}
       width={814}
       height={279}
