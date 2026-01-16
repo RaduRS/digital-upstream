@@ -34,7 +34,7 @@ export type ProjectDetail = {
 
 export type ProjectMediaItem = {
   kind: "image" | "video";
-  src: `/${string}`;
+  src: `/${string}` | `https://${string}` | `http://${string}`;
   alt: string;
   label?: string;
 };
@@ -85,7 +85,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     media: [
       {
         kind: "video",
-        src: "/video2.mp4",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/video2.mp4",
         alt: "FreshMeal demo video placeholder",
         label: "Demo (placeholder)",
       },
@@ -137,7 +137,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     media: [
       {
         kind: "video",
-        src: "/video2.mp4",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/video2.mp4",
         alt: "Vocalenda demo video placeholder",
         label: "Call flow (placeholder)",
       },
@@ -188,7 +188,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     media: [
       {
         kind: "video",
-        src: "/video2.mp4",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/video2.mp4",
         alt: "Automan demo video placeholder",
         label: "Pipeline run (placeholder)",
       },
@@ -236,7 +236,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     media: [
       {
         kind: "video",
-        src: "/video2.mp4",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/video2.mp4",
         alt: "Chat-Smith demo video placeholder",
         label: "Widget demo (placeholder)",
       },
@@ -426,7 +426,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     media: [
       {
         kind: "video",
-        src: "/video2.mp4",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/video2.mp4",
         alt: "Summaraize demo video placeholder",
         label: "Workflow demo (placeholder)",
       },

@@ -11,7 +11,7 @@ export default function HeroSection() {
           <Reveal>
             <Parallax strength={0.12} maxTranslate={40}>
               <video
-                src="/video2.mp4"
+                src="https://digital-upstream.s3.eu-central-003.backblazeb2.com/video2.mp4"
                 autoPlay
                 muted
                 loop

@@ -5,6 +5,13 @@ const isDev = process.env.NODE_ENV !== "production";
 const scriptSrc = ["'self'", "'unsafe-inline'", ...(isDev ? ["'unsafe-eval'"] : [])];
 const connectSrc = ["'self'", ...(isDev ? ["ws:"] : [])];
 
+const externalAssetOrigins = (process.env.CSP_ASSET_ORIGINS ?? "")
+  .split(/[\s,]+/g)
+  .filter(Boolean);
+
+const imgSrc = ["'self'", "data:", ...externalAssetOrigins];
+const mediaSrc = ["'self'", ...externalAssetOrigins];
+
 const csp = [
   "default-src 'self'",
   "base-uri 'self'",
@@ -13,10 +20,10 @@ const csp = [
   "frame-ancestors 'none'",
   `script-src ${scriptSrc.join(" ")}`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data:",
+  `img-src ${imgSrc.join(" ")}`,
   "font-src 'self'",
   `connect-src ${connectSrc.join(" ")}`,
-  "media-src 'self'",
+  `media-src ${mediaSrc.join(" ")}`,
   "manifest-src 'self'",
   "worker-src 'self'",
   "frame-src 'none'",

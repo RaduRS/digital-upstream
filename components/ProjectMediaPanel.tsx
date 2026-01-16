@@ -63,7 +63,7 @@ export default function ProjectMediaPanel({
               src={hero.src}
               controls
               playsInline
-              preload="metadata"
+              preload="none"
             />
           ) : (
             <button
