@@ -27,7 +27,7 @@ export default function ContactSection() {
                 }
                 subtitle={
                   <span className="lg:whitespace-nowrap">
-                    Tell us about your project, timeline, and goals.
+                    Tell me about your project, timeline, and goals.
                   </span>
                 }
                 id="contact-title"
@@ -43,14 +43,14 @@ export default function ContactSection() {
                   className="inline-flex items-center justify-center rounded-md border border-foreground/15 px-5 py-3 text-lg sm:text-xl font-medium hover:border-foreground/30 transition-colors"
                   aria-label="Email Digital Upstream"
                 >
-                  Email us
+                  Email me
                 </Link>
                 <Link
                   href="#projects"
                   className="inline-block text-lg sm:text-xl link-underline-hide-ltr link-underline-tight text-foreground/80 hover:text-foreground transition-colors"
-                  aria-label="See our projects"
+                  aria-label="See my projects"
                 >
-                  See our work
+                  See my work
                 </Link>
               </div>
             </Parallax>

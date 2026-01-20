@@ -18,7 +18,7 @@ export default function HowWeWorkSection() {
 
           <Reveal>
             <Parallax strength={0.1} maxTranslate={28}>
-              <SectionHeading id="how-title" title="How we work" subtitle="Three parts, one outcome: clarity." />
+              <SectionHeading id="how-title" title="How I work" subtitle="Three parts, one outcome: clarity." />
             </Parallax>
           </Reveal>
 
