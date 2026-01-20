@@ -115,7 +115,7 @@ export default function RootLayout({
             name: "Digital Upstream",
             url: "https://digital-upstream.com",
             logo: "https://digital-upstream.com/digital-upstream-logo.png",
-            sameAs: [],
+            sameAs: ["https://www.tiktok.com/@digitalupstream"],
             contactPoint: [
               {
                 "@type": "ContactPoint",
