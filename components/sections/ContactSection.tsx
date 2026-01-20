@@ -25,7 +25,11 @@ export default function ContactSection() {
                     <span className="block">Get in touch</span>
                   </>
                 }
-                subtitle={<span className="lg:whitespace-nowrap">Tell us about your project, timeline, and goals.</span>}
+                subtitle={
+                  <span className="lg:whitespace-nowrap">
+                    Tell us about your project, timeline, and goals.
+                  </span>
+                }
                 id="contact-title"
               />
             </Parallax>
@@ -47,15 +51,6 @@ export default function ContactSection() {
                   aria-label="See our projects"
                 >
                   See our work
-                </Link>
-                <Link
-                  href="https://www.tiktok.com/@digitalupstream"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block text-lg sm:text-xl link-underline-hide-ltr link-underline-tight text-foreground/80 hover:text-foreground transition-colors"
-                  aria-label="Digital Upstream on TikTok"
-                >
-                  TikTok
                 </Link>
               </div>
             </Parallax>

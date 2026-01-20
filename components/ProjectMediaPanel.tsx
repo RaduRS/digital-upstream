@@ -63,7 +63,7 @@ export default function ProjectMediaPanel({
   return (
     <>
       <div className="rounded-lg border border-foreground/10 bg-background/40 overflow-hidden">
-        <div className="aspect-video w-full bg-black/20">
+        <div className="aspect-video w-full bg-background">
           {hero.kind === "video" ? (
             <video
               className="h-full w-full object-contain"

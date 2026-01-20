@@ -123,9 +123,9 @@ export default function ProjectMediaStrip({
           {items.map((m, index) => (
             <div
               key={`${m.kind}-${m.src}-${m.label ?? ""}`}
-              className="min-w-[220px] sm:min-w-[240px] snap-start rounded-md border border-foreground/10 bg-background/30 overflow-hidden"
+              className="min-w-[220px] sm:min-w-[240px] snap-start rounded-md border border-foreground/10 bg-background overflow-hidden"
             >
-              <div className="aspect-video bg-black/20">
+              <div className="aspect-video bg-background">
                 {m.kind === "video" ? (
                   <video
                     className="h-full w-full object-contain"
