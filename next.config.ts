@@ -5,12 +5,18 @@ const isDev = process.env.NODE_ENV !== "production";
 const scriptSrc = ["'self'", "'unsafe-inline'", ...(isDev ? ["'unsafe-eval'"] : [])];
 const connectSrc = ["'self'", ...(isDev ? ["ws:"] : [])];
 
+const defaultAssetOrigins = [
+  "https://digital-upstream.s3.eu-central-003.backblazeb2.com",
+  "https://f003.backblazeb2.com",
+];
+
 const externalAssetOrigins = (process.env.CSP_ASSET_ORIGINS ?? "")
   .split(/[\s,]+/g)
   .filter(Boolean);
 
-const imgSrc = ["'self'", "data:", ...externalAssetOrigins];
-const mediaSrc = ["'self'", ...externalAssetOrigins];
+const assetOrigins = [...defaultAssetOrigins, ...externalAssetOrigins];
+const imgSrc = ["'self'", "data:", ...assetOrigins];
+const mediaSrc = ["'self'", ...assetOrigins];
 
 const csp = [
   "default-src 'self'",

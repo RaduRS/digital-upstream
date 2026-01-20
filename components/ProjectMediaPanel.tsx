@@ -14,6 +14,13 @@ export default function ProjectMediaPanel({
   hero: ProjectMediaItem;
   gallery: ProjectMediaItem[];
 }) {
+  const posterSrc = useMemo(() => {
+    const pick =
+      gallery.find((m) => m.kind === "image" && (m.label ?? "") !== "Logo") ??
+      gallery.find((m) => m.kind === "image");
+    return pick?.src;
+  }, [gallery]);
+
   const allImages = useMemo(() => {
     const combined = [hero, ...gallery].filter((m) => m.kind === "image");
     const seen = new Set<string>();
@@ -39,7 +46,7 @@ export default function ProjectMediaPanel({
         title: m.label ?? m.alt,
         description: m.label ? m.alt : undefined,
       })),
-    [allImages]
+    [allImages],
   );
 
   const openFromItem = (item: ProjectMediaItem) => {
@@ -48,7 +55,7 @@ export default function ProjectMediaPanel({
       (m) =>
         m.kind === "image" &&
         m.src === item.src &&
-        (m.label ?? "") === (item.label ?? "")
+        (m.label ?? "") === (item.label ?? ""),
     );
     setLightboxIndex(idx >= 0 ? idx : 0);
   };
@@ -59,8 +66,9 @@ export default function ProjectMediaPanel({
         <div className="aspect-video w-full bg-black/20">
           {hero.kind === "video" ? (
             <video
-              className="h-full w-full object-cover"
+              className="h-full w-full object-contain"
               src={hero.src}
+              poster={posterSrc}
               controls
               playsInline
               preload="none"
@@ -79,7 +87,7 @@ export default function ProjectMediaPanel({
                 priority
                 unoptimized
                 sizes="(max-width: 1024px) 100vw, 420px"
-                className="object-cover"
+                className="object-contain"
               />
             </button>
           )}

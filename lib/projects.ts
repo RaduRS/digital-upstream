@@ -68,7 +68,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       "FreshMeal helps you discover healthy recipes based on ingredients you already have. Build a pantry by scanning barcodes or taking photos, then get AI-assisted recipe suggestions you can filter by meal type, servings, and dietary preferences.",
     problemSolved: [
       "Eliminates the friction of “what can I cook right now?”",
-      "Reduces food waste by tracking pantry inventory and expiry dates",
+      "Reduces food waste by tracking pantry inventory",
       "Promotes healthy eating through practical, ingredient-aware suggestions",
       "Makes shopping smarter by surfacing missing ingredients",
     ],
@@ -76,7 +76,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
       "Users that are health-conscious, wants practical tools that fit naturally into daily cooking routines.",
     highlights: [
       "Barcode scanning and photo capture to add pantry items",
-      "Pantry inventory with quantities and expiry tracking",
+      "Pantry inventory with quantities",
       "Recipe suggestions driven by available ingredients",
       "Filters: meal type, servings, dietary preferences",
       "Shopping list built from missing ingredients",
@@ -85,27 +85,75 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     media: [
       {
         kind: "video",
-        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/video2.mp4",
-        alt: "FreshMeal demo video placeholder",
-        label: "Demo (placeholder)",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/fresh%20meal/Fresh%20meal.mp4",
+        alt: "FreshMeal demo video",
+        label: "Demo",
       },
       {
         kind: "image",
-        src: "/projects/placeholder-01.svg",
-        alt: "FreshMeal screenshot placeholder 1",
-        label: "Pantry",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/fresh+meal/fresh-meal-logo.png",
+        alt: "FreshMeal logo",
+        label: "Logo",
       },
       {
         kind: "image",
-        src: "/projects/placeholder-02.svg",
-        alt: "FreshMeal screenshot placeholder 2",
-        label: "Recipes",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/fresh%20meal/Freash%20meal%20-%20scan%20mode.jpeg",
+        alt: "FreshMeal scan mode screen",
+        label: "Scan mode",
       },
       {
         kind: "image",
-        src: "/projects/placeholder-03.svg",
-        alt: "FreshMeal screenshot placeholder 3",
-        label: "Shopping list",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/fresh+meal/Freash+meal+-++scan+items.jpeg",
+        alt: "FreshMeal scan items screen",
+        label: "Scan items",
+      },
+      {
+        kind: "image",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/fresh%20meal/Freash%20meal%20-%20photo%20mode.jpeg",
+        alt: "FreshMeal photo mode screen",
+        label: "Photo mode",
+      },
+      {
+        kind: "image",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/fresh%20meal/Freash%20meal%20-%20photo%20items.jpeg",
+        alt: "FreshMeal photo items screen",
+        label: "Photo items",
+      },
+      {
+        kind: "image",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/fresh%20meal/Freash%20meal%20-%20ingredients%20list.jpeg",
+        alt: "FreshMeal ingredients list screen",
+        label: "Ingredients list",
+      },
+      {
+        kind: "image",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/fresh%20meal/Freash%20meal%20-%20recipes%20list.jpeg",
+        alt: "FreshMeal recipes list screen",
+        label: "Recipes list",
+      },
+      {
+        kind: "image",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/fresh%20meal/Freash%20meal%20-%20recipes%20list%202.jpeg",
+        alt: "FreshMeal recipes list screen (variant)",
+        label: "Recipes list 2",
+      },
+      {
+        kind: "image",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/fresh%20meal/Freash%20meal%20-%20recipes%20view.jpeg",
+        alt: "FreshMeal recipes view screen",
+        label: "Recipes view",
+      },
+      {
+        kind: "image",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/fresh%20meal/Freash%20meal%20-%20cooked%20modal.jpeg",
+        alt: "FreshMeal cooked modal screen",
+        label: "Cooked modal",
+      },
+      {
+        kind: "image",
+        src: "https://digital-upstream.s3.eu-central-003.backblazeb2.com/fresh%20meal/Freash%20meal%20-%20manual%20mode.jpeg",
+        alt: "FreshMeal manual mode screen",
+        label: "Manual mode",
       },
     ],
     label: "CASE‑01",
@@ -455,7 +503,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
 };
 
 export const PROJECTS_ALL: ProjectListItem[] = Object.entries(
-  PROJECT_DETAILS
+  PROJECT_DETAILS,
 ).map(([slug, p]) => ({
   href: `/projects/${slug}`,
   slug,
@@ -467,5 +515,5 @@ export const PROJECTS_ALL: ProjectListItem[] = Object.entries(
 }));
 
 export const PROJECTS_FEATURED: ProjectListItem[] = PROJECTS_ALL.filter(
-  (p) => PROJECT_DETAILS[p.slug]?.featured
+  (p) => PROJECT_DETAILS[p.slug]?.featured,
 );

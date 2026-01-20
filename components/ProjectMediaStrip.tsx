@@ -12,6 +12,13 @@ export default function ProjectMediaStrip({
   items: ProjectMediaItem[];
   onItemClick?: (index: number) => void;
 }) {
+  const posterSrc = useMemo(() => {
+    const pick =
+      items.find((m) => m.kind === "image" && (m.label ?? "") !== "Logo") ??
+      items.find((m) => m.kind === "image");
+    return pick?.src;
+  }, [items]);
+
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
@@ -22,7 +29,7 @@ export default function ProjectMediaStrip({
     const maxDots = 6;
     if (items.length <= maxDots) return items.map((_, i) => i);
     const raw = Array.from({ length: maxDots }, (_, i) =>
-      Math.round((i * (items.length - 1)) / (maxDots - 1))
+      Math.round((i * (items.length - 1)) / (maxDots - 1)),
     );
     return raw.filter((v, i) => raw.indexOf(v) === i);
   }, [items]);
@@ -86,7 +93,7 @@ export default function ProjectMediaStrip({
   const scrollByCards = (direction: -1 | 1) => {
     const next = Math.max(
       0,
-      Math.min(items.length - 1, activeIndex + direction)
+      Math.min(items.length - 1, activeIndex + direction),
     );
     scrollToIndex(next);
   };
@@ -121,8 +128,9 @@ export default function ProjectMediaStrip({
               <div className="aspect-video bg-black/20">
                 {m.kind === "video" ? (
                   <video
-                    className="h-full w-full object-cover"
+                    className="h-full w-full object-contain"
                     src={m.src}
+                    poster={posterSrc}
                     controls
                     playsInline
                     preload="metadata"
