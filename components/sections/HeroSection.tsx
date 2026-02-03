@@ -11,20 +11,21 @@ export default function HeroSection() {
         <div className="relative flex items-start justify-start px-4 sm:px-6 md:px-8 py-6 sm:py-8">
           <video
             src="https://digital-upstream.s3.eu-central-003.backblazeb2.com/video2.mp4"
+            poster="/projects/poster.jpg"
             autoPlay
             muted
             loop
             playsInline
-            preload="auto"
+            preload="metadata"
             width={700}
             height={700}
-            className="w-full h-auto object-contain object-left sm:max-w-[700px] sm:max-h-[700px]"
+            className="w-full aspect-square object-contain object-left sm:max-w-[700px] sm:max-h-[700px]"
             aria-hidden="true"
             tabIndex={-1}
           />
         </div>
 
-        <div className="flex items-start justify-start text-left relative py-20 sm:py-24 md:py-32 px-4 sm:px-6 md:px-8">
+        <div className="flex items-start justify-start text-left relative py-20 sm:py-24 md:py-32 px-4 sm:px-6 md:px-8 min-h-[360px] sm:min-h-[420px] md:min-h-[480px]">
           <div>
             <DGLabel
               Icon={Diamond}
