@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import HomeThemeScroll from "@/components/HomeThemeScroll";
+import CookieConsent from "@/components/CookieConsent";
 
 const jakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -105,6 +106,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
+        <CookieConsent />
         <Header />
         {children}
         {/* JSON-LD: Organization */}

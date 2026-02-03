@@ -1,4 +1,5 @@
 import Container from "@/components/Container";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -16,6 +17,12 @@ export default function Footer() {
             >
               contact@digital-upstream.com
             </a>
+            <Link
+              href="/cookies"
+              className="link-underline-hide-ltr link-underline-tight text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+            >
+              Cookies policy
+            </Link>
             <a
               href="https://www.tiktok.com/@digitalupstream"
               target="_blank"
