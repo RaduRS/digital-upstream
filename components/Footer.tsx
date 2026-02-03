@@ -18,10 +18,22 @@ export default function Footer() {
               contact@digital-upstream.com
             </a>
             <Link
+              href="/projects"
+              className="link-underline-hide-ltr link-underline-tight text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+            >
+              Projects
+            </Link>
+            <Link
               href="/cookies"
               className="link-underline-hide-ltr link-underline-tight text-primary-foreground/80 hover:text-primary-foreground transition-colors"
             >
               Cookies policy
+            </Link>
+            <Link
+              href="/privacy"
+              className="link-underline-hide-ltr link-underline-tight text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+            >
+              Privacy policy
             </Link>
             <a
               href="https://www.tiktok.com/@digitalupstream"

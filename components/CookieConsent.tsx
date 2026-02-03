@@ -60,6 +60,52 @@ const getSnapshot = () => {
   return isValidConsent(cookieValue) ? cookieValue : null;
 };
 
+const setCookieExpired = (name: string, domain?: string) => {
+  const parts = [
+    `${name}=`,
+    "Path=/",
+    "Max-Age=0",
+    "Expires=Thu, 01 Jan 1970 00:00:00 GMT",
+    "SameSite=Lax",
+  ];
+  if (domain) {
+    parts.push(`Domain=${domain}`);
+  }
+  if (typeof window !== "undefined" && window.location.protocol === "https:") {
+    parts.push("Secure");
+  }
+  document.cookie = parts.join("; ");
+};
+
+const clearAnalyticsCookies = () => {
+  const cookieString = typeof document === "undefined" ? "" : document.cookie;
+  const names = cookieString
+    .split(";")
+    .map((c) => c.trim())
+    .filter(Boolean)
+    .map((c) => c.split("=")[0])
+    .filter(
+      (name) =>
+        name === "_ga" ||
+        name === "_gid" ||
+        name === "_gat" ||
+        name.startsWith("_ga_") ||
+        name.startsWith("_gat_"),
+    );
+
+  const uniqueNames = Array.from(new Set(names));
+  const host =
+    typeof window === "undefined" ? "" : window.location.hostname.trim();
+  const domains = host ? [host, `.${host}`] : [];
+
+  for (const name of uniqueNames) {
+    setCookieExpired(name);
+    for (const domain of domains) {
+      setCookieExpired(name, domain);
+    }
+  }
+};
+
 export default function CookieConsent({
   initialConsent = null,
 }: CookieConsentProps) {
@@ -73,6 +119,9 @@ export default function CookieConsent({
   const updateConsent = useCallback((value: ConsentValue) => {
     window.localStorage.setItem(STORAGE_KEY, value);
     setConsentCookie(value);
+    if (value === "denied") {
+      clearAnalyticsCookies();
+    }
     window.dispatchEvent(new Event("du-cookie-consent"));
   }, []);
 
@@ -92,6 +141,10 @@ export default function CookieConsent({
     const cookieValue = getCookieValue(COOKIE_NAME);
     if (cookieValue !== consent) {
       setConsentCookie(consent);
+    }
+
+    if (consent === "denied") {
+      clearAnalyticsCookies();
     }
   }, [consent]);
 
@@ -140,7 +193,7 @@ gtag('config', '${ANALYTICS_ID}');`}
                   </h2>
                   <p className="text-sm text-foreground/80">
                     We use Google Analytics to measure traffic and improve the
-                    website. Choose yes or no to continue.
+                    website. Accept or decline to continue.
                   </p>
                 </div>
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end sm:pt-6">
@@ -179,7 +232,7 @@ gtag('config', '${ANALYTICS_ID}');`}
                 </h2>
                 <p className="text-sm text-foreground/80 sm:text-base">
                   We use Google Analytics to measure traffic and improve the
-                  website. Choose yes or no to continue.
+                  website. Accept or decline to continue.
                 </p>
               </div>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">

@@ -102,6 +102,16 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <link
+          rel="preconnect"
+          href="https://digital-upstream.s3.eu-central-003.backblazeb2.com"
+        />
+        <link
+          rel="dns-prefetch"
+          href="https://digital-upstream.s3.eu-central-003.backblazeb2.com"
+        />
+      </head>
       <body
         className={`${jakartaSans.variable} ${geistMono.variable} min-h-screen bg-background text-foreground antialiased font-sans`}
       >
@@ -132,6 +142,19 @@ export default async function RootLayout({
                 availableLanguage: ["en"],
               },
             ],
+          })}
+        </Script>
+        <Script id="service-jsonld" type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: "Digital Upstream",
+            url: "https://digital-upstream.com",
+            description: "Web development, UI/UX, and product design services.",
+            email: "contact@digital-upstream.com",
+            sameAs: ["https://www.tiktok.com/@digitalupstream"],
+            areaServed: "Worldwide",
+            serviceType: ["Web development", "UI/UX design", "Branding"],
           })}
         </Script>
         <Script id="website-jsonld" type="application/ld+json">

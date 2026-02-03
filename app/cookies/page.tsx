@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import Script from "next/script";
 import Container from "@/components/Container";
 
 export const metadata: Metadata = {
   title: "Cookies Policy",
   description:
     "Learn how Digital Upstream uses cookies and analytics, and how to control your preference.",
+  alternates: { canonical: "/cookies" },
 };
 
 export default function CookiesPage() {
@@ -23,6 +26,20 @@ export default function CookiesPage() {
               This policy explains how Digital Upstream uses cookies and similar
               technologies, and how you can manage your choices.
             </p>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-foreground/70">
+              <Link
+                href="/privacy"
+                className="link-underline-rtl text-foreground"
+              >
+                Privacy policy
+              </Link>
+              <Link
+                href="/#contact"
+                className="link-underline-rtl text-foreground"
+              >
+                Contact
+              </Link>
+            </div>
           </div>
 
           <section className="space-y-3">
@@ -94,6 +111,21 @@ export default function CookiesPage() {
           </section>
         </div>
       </Container>
+      <Script id="cookies-webpage-jsonld" type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: "Cookies Policy",
+          url: "https://digital-upstream.com/cookies",
+          description:
+            "Learn how Digital Upstream uses cookies and analytics, and how to control your preference.",
+          isPartOf: {
+            "@type": "WebSite",
+            name: "Digital Upstream",
+            url: "https://digital-upstream.com",
+          },
+        })}
+      </Script>
     </main>
   );
 }
