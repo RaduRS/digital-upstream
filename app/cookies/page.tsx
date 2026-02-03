@@ -28,35 +28,44 @@ export default function CookiesPage() {
           <section className="space-y-3">
             <h2 className="text-xl font-semibold sm:text-2xl">What we use</h2>
             <p className="text-foreground/80">
-              We only use analytics cookies when you choose yes in the cookie
-              banner. These cookies help us understand how the site is used and
-              which pages perform best.
+              We only use analytics when you accept in the cookie banner. This
+              helps us understand aggregated usage (for example which pages are
+              visited) so we can improve the site.
             </p>
             <div className="space-y-2 text-foreground/80">
               <div className="flex items-start gap-3">
                 <span className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground/60" />
                 <p>
-                  Google Analytics (ID: G-YW8E57E2BS) to measure traffic and
+                  Google Analytics (provided by Google) to measure traffic and
                   usage trends.
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <span className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground/60" />
-                <p>
-                  A local preference record that remembers your consent choice.
-                </p>
+                <p>A preference record that remembers your consent choice.</p>
               </div>
             </div>
           </section>
 
           <section className="space-y-3">
+            <h2 className="text-xl font-semibold sm:text-2xl">Your choices</h2>
+            <p className="text-foreground/80">
+              You must accept or decline before continuing to use the site. If
+              you decline, we do not load Google Analytics. If you accept, we
+              load Google Analytics so we can improve performance and content.
+            </p>
+          </section>
+
+          <section className="space-y-3">
             <h2 className="text-xl font-semibold sm:text-2xl">
-              Your choices
+              Third-party processing
             </h2>
             <p className="text-foreground/80">
-              You must choose yes or no before continuing to use the site. If
-              you say no, we do not load analytics. If you say yes, we load
-              Google Analytics so we can improve performance and content.
+              When enabled, Google Analytics may process data on our behalf. The
+              data collected via analytics may include information about your
+              device and how you interact with the site. Google may process data
+              in different countries. For details, review Google’s documentation
+              and policies.
             </p>
           </section>
 
