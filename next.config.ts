@@ -8,6 +8,7 @@ const analyticsConnectSrc = [
   "https://www.google-analytics.com",
   "https://region1.google-analytics.com",
 ];
+const analyticsImgSrc = ["https://www.googletagmanager.com"];
 
 const scriptSrc = [
   "'self'",
@@ -31,7 +32,7 @@ const externalAssetOrigins = (process.env.CSP_ASSET_ORIGINS ?? "")
   .filter(Boolean);
 
 const assetOrigins = [...defaultAssetOrigins, ...externalAssetOrigins];
-const imgSrc = ["'self'", "data:", ...assetOrigins];
+const imgSrc = ["'self'", "data:", ...assetOrigins, ...analyticsImgSrc];
 const mediaSrc = ["'self'", ...assetOrigins];
 
 const csp = [
