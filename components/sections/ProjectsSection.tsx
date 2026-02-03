@@ -259,7 +259,6 @@ export default function ProjectsSection() {
                     <Reveal key={p.href} delay={i * 120} threshold={0.2}>
                       <Link
                         href={p.href}
-                        role="listitem"
                         className="group block"
                         aria-label={`Open ${p.title} details`}
                       >

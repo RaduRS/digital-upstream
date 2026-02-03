@@ -111,6 +111,7 @@ export default async function RootLayout({
           rel="dns-prefetch"
           href="https://digital-upstream.s3.eu-central-003.backblazeb2.com"
         />
+        <link rel="preload" as="image" href="/projects/poster.jpg" />
       </head>
       <body
         className={`${jakartaSans.variable} ${geistMono.variable} min-h-screen bg-background text-foreground antialiased font-sans`}
