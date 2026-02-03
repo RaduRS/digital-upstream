@@ -134,7 +134,6 @@ export default async function RootLayout({
             ],
           })}
         </Script>
-        {/* JSON-LD: Website */}
         <Script id="website-jsonld" type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
