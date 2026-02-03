@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import Script from "next/script";
 import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -99,6 +99,7 @@ export default async function RootLayout({
   const cookieValue = cookieStore.get("du_cookie_consent")?.value ?? null;
   const initialConsent =
     cookieValue === "granted" || cookieValue === "denied" ? cookieValue : null;
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
 
   return (
     <html lang="en" className="scroll-smooth">
@@ -123,11 +124,11 @@ export default async function RootLayout({
         >
           Skip to content
         </a>
-        <CookieConsent initialConsent={initialConsent} />
+        <CookieConsent initialConsent={initialConsent} scriptNonce={nonce} />
         <Header />
         {children}
         {/* JSON-LD: Organization */}
-        <Script id="org-jsonld" type="application/ld+json">
+        <Script id="org-jsonld" type="application/ld+json" nonce={nonce}>
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
@@ -145,7 +146,7 @@ export default async function RootLayout({
             ],
           })}
         </Script>
-        <Script id="service-jsonld" type="application/ld+json">
+        <Script id="service-jsonld" type="application/ld+json" nonce={nonce}>
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ProfessionalService",
@@ -158,7 +159,7 @@ export default async function RootLayout({
             serviceType: ["Web development", "UI/UX design", "Branding"],
           })}
         </Script>
-        <Script id="website-jsonld" type="application/ld+json">
+        <Script id="website-jsonld" type="application/ld+json" nonce={nonce}>
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",

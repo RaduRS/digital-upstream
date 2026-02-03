@@ -6,7 +6,10 @@ import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useSyncExternalStore } from "react";
 
 type ConsentValue = "granted" | "denied";
-type CookieConsentProps = { initialConsent?: ConsentValue | null };
+type CookieConsentProps = {
+  initialConsent?: ConsentValue | null;
+  scriptNonce?: string;
+};
 
 const ANALYTICS_ID = "G-YW8E57E2BS";
 const STORAGE_KEY = "du_cookie_consent";
@@ -108,6 +111,7 @@ const clearAnalyticsCookies = () => {
 
 export default function CookieConsent({
   initialConsent = null,
+  scriptNonce,
 }: CookieConsentProps) {
   const pathname = usePathname();
   const consent = useSyncExternalStore(
@@ -165,8 +169,9 @@ export default function CookieConsent({
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_ID}`}
             strategy="afterInteractive"
+            nonce={scriptNonce}
           />
-          <Script id="gtag-init" strategy="afterInteractive">
+          <Script id="gtag-init" strategy="afterInteractive" nonce={scriptNonce}>
             {`window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
