@@ -5,11 +5,38 @@ import Script from "next/script";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useSyncExternalStore } from "react";
 
+type ConsentValue = "granted" | "denied";
+type CookieConsentProps = { initialConsent?: ConsentValue | null };
+
 const ANALYTICS_ID = "G-YW8E57E2BS";
 const STORAGE_KEY = "du_cookie_consent";
+const COOKIE_NAME = "du_cookie_consent";
 
-const isValidConsent = (value: string | null): value is "granted" | "denied" =>
+const isValidConsent = (value: string | null): value is ConsentValue =>
   value === "granted" || value === "denied";
+
+const getCookieValue = (cookieName: string) => {
+  const cookieString = typeof document === "undefined" ? "" : document.cookie;
+  const cookies = cookieString.split(";").map((c) => c.trim());
+  const match = cookies.find((c) => c.startsWith(`${cookieName}=`));
+  if (!match) {
+    return null;
+  }
+  return decodeURIComponent(match.slice(cookieName.length + 1));
+};
+
+const setConsentCookie = (value: ConsentValue) => {
+  const parts = [
+    `${COOKIE_NAME}=${encodeURIComponent(value)}`,
+    "Path=/",
+    "Max-Age=31536000",
+    "SameSite=Lax",
+  ];
+  if (typeof window !== "undefined" && window.location.protocol === "https:") {
+    parts.push("Secure");
+  }
+  document.cookie = parts.join("; ");
+};
 
 const subscribe = (callback: () => void) => {
   const handler = () => callback();
@@ -26,26 +53,47 @@ const getSnapshot = () => {
     return null;
   }
   const stored = window.localStorage.getItem(STORAGE_KEY);
-  return isValidConsent(stored) ? stored : null;
+  if (isValidConsent(stored)) {
+    return stored;
+  }
+  const cookieValue = getCookieValue(COOKIE_NAME);
+  return isValidConsent(cookieValue) ? cookieValue : null;
 };
 
-const getServerSnapshot = () => null;
-
-export default function CookieConsent() {
+export default function CookieConsent({
+  initialConsent = null,
+}: CookieConsentProps) {
   const pathname = usePathname();
   const consent = useSyncExternalStore(
     subscribe,
     getSnapshot,
-    getServerSnapshot,
+    () => initialConsent,
   );
 
-  const updateConsent = useCallback((value: "granted" | "denied") => {
+  const updateConsent = useCallback((value: ConsentValue) => {
     window.localStorage.setItem(STORAGE_KEY, value);
+    setConsentCookie(value);
     window.dispatchEvent(new Event("du-cookie-consent"));
   }, []);
 
   const isCookiesPolicyPage = pathname === "/cookies";
   const shouldBlock = consent === null && !isCookiesPolicyPage;
+
+  useEffect(() => {
+    if (consent === null) {
+      return;
+    }
+
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    if (stored !== consent) {
+      window.localStorage.setItem(STORAGE_KEY, consent);
+    }
+
+    const cookieValue = getCookieValue(COOKIE_NAME);
+    if (cookieValue !== consent) {
+      setConsentCookie(consent);
+    }
+  }, [consent]);
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;

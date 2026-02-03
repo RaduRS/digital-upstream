@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { cookies } from "next/headers";
 import Script from "next/script";
 import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -89,11 +90,16 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cookieStore = await cookies();
+  const cookieValue = cookieStore.get("du_cookie_consent")?.value ?? null;
+  const initialConsent =
+    cookieValue === "granted" || cookieValue === "denied" ? cookieValue : null;
+
   return (
     <html lang="en" className="scroll-smooth">
       <body
@@ -106,7 +112,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <CookieConsent />
+        <CookieConsent initialConsent={initialConsent} />
         <Header />
         {children}
         {/* JSON-LD: Organization */}

@@ -26,7 +26,7 @@ export default function Header() {
             </li>
             <li>
               <Link
-                href="#contact"
+                href="/#contact"
                 className="link-underline-rtl text-lg sm:text-xl text-foreground/80 hover:text-foreground transition-colors"
               >
                 Contact
