@@ -2,8 +2,24 @@ import type { NextConfig } from "next";
 
 const isDev = process.env.NODE_ENV !== "production";
 
-const scriptSrc = ["'self'", "'unsafe-inline'", ...(isDev ? ["'unsafe-eval'"] : [])];
-const connectSrc = ["'self'", ...(isDev ? ["ws:"] : [])];
+const analyticsScriptSrc = ["https://www.googletagmanager.com"];
+const analyticsConnectSrc = [
+  "https://www.googletagmanager.com",
+  "https://www.google-analytics.com",
+  "https://region1.google-analytics.com",
+];
+
+const scriptSrc = [
+  "'self'",
+  "'unsafe-inline'",
+  ...analyticsScriptSrc,
+  ...(isDev ? ["'unsafe-eval'"] : []),
+];
+const connectSrc = [
+  "'self'",
+  ...analyticsConnectSrc,
+  ...(isDev ? ["ws:"] : []),
+];
 
 const defaultAssetOrigins = [
   "https://digital-upstream.s3.eu-central-003.backblazeb2.com",
@@ -25,6 +41,7 @@ const csp = [
   "object-src 'none'",
   "frame-ancestors 'none'",
   `script-src ${scriptSrc.join(" ")}`,
+  `script-src-elem ${scriptSrc.join(" ")}`,
   "style-src 'self' 'unsafe-inline'",
   `img-src ${imgSrc.join(" ")}`,
   "font-src 'self'",
@@ -41,8 +58,14 @@ const securityHeaders = [
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "X-Frame-Options", value: "DENY" },
-  { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains; preload" },
-  { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), browsing-topics=()" },
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=31536000; includeSubDomains; preload",
+  },
+  {
+    key: "Permissions-Policy",
+    value: "camera=(), microphone=(), geolocation=(), browsing-topics=()",
+  },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
   { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
 ];
