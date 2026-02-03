@@ -146,7 +146,6 @@ export default function ProjectMediaStrip({
                       src={m.src}
                       alt={m.alt}
                       fill
-                      unoptimized
                       sizes="240px"
                       className="object-contain"
                     />

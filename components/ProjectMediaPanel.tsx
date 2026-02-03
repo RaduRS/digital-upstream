@@ -85,7 +85,6 @@ export default function ProjectMediaPanel({
                 alt={hero.alt}
                 fill
                 priority
-                unoptimized
                 sizes="(max-width: 1024px) 100vw, 420px"
                 className="object-contain"
               />
