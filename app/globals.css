@@ -429,7 +429,7 @@
   }
 
   .prose-custom blockquote::before {
-    content: """;
+    content: "\201C";
     position: absolute;
     left: 0.5em;
     top: 0.75em;
@@ -440,7 +440,7 @@
   }
 
   .prose-custom blockquote::after {
-    content: """;
+    content: "\201D";
     display: none;
   }
 

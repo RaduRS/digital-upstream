@@ -29,7 +29,7 @@ const createNonce = () => {
   return btoa(chars);
 };
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   // Protect /admin routes (but allow /admin/login)
   const { pathname } = request.nextUrl;
   if (pathname.startsWith("/admin") && !pathname.startsWith("/admin/login")) {
