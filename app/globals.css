@@ -309,4 +309,207 @@
   }
 
   /* No motion-specific overlay to reduce complexity */
+
+  /* Blog article prose styles */
+  .prose-custom {
+    font-family: var(--font-plus-jakarta), sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: var(--foreground);
+  }
+
+  .prose-custom > * + * {
+    margin-top: 1.5em;
+  }
+
+  /* First paragraph stands out */
+  .prose-custom > p:first-of-type {
+    font-size: 1.125rem;
+    line-height: 1.75;
+    color: oklch(0.4 0.005 285.823);
+  }
+
+  .prose-custom p {
+    font-family: var(--font-plus-jakarta), sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    color: oklch(0.35 0.005 285.823);
+  }
+
+  .prose-custom h2 {
+    font-family: var(--font-fraunces), serif;
+    font-size: 1.75rem;
+    font-weight: 500;
+    line-height: 1.25;
+    margin-top: 2.5em;
+    margin-bottom: 0.75em;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+  }
+
+  .prose-custom h3 {
+    font-family: var(--font-fraunces), serif;
+    font-size: 1.375rem;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+  }
+
+  .prose-custom a {
+    color: var(--foreground);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: oklch(0.7 0.015 285.823);
+    transition: text-decoration-color 200ms ease;
+  }
+
+  .prose-custom a:hover {
+    text-decoration-color: var(--foreground);
+  }
+
+  .prose-custom strong {
+    font-weight: 600;
+    color: var(--foreground);
+  }
+
+  .prose-custom em {
+    font-style: italic;
+  }
+
+  .prose-custom ul,
+  .prose-custom ol {
+    padding-left: 1.5em;
+    margin: 1.25em 0;
+  }
+
+  .prose-custom ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .prose-custom ul li {
+    position: relative;
+    padding-left: 1.25em;
+    margin-bottom: 0.5em;
+    color: oklch(0.35 0.005 285.823);
+  }
+
+  .prose-custom ul li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: oklch(0.55 0.015 285.823);
+  }
+
+  .prose-custom ol {
+    list-style-type: decimal;
+  }
+
+  .prose-custom ol li {
+    padding-left: 0.5em;
+    margin-bottom: 0.5em;
+    color: oklch(0.35 0.005 285.823);
+  }
+
+  .prose-custom ol li::marker {
+    color: oklch(0.55 0.015 285.823);
+  }
+
+  .prose-custom blockquote {
+    font-family: var(--font-instrument-serif), serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: oklch(0.3 0.005 285.823);
+    padding: 1.5em 0 1.5em 3em;
+    margin: 2.5em 0;
+    position: relative;
+    border-left: 3px solid oklch(0.75 0.015 285.823);
+  }
+
+  .prose-custom blockquote::before {
+    content: """;
+    position: absolute;
+    left: 0.5em;
+    top: 0.75em;
+    font-size: 4rem;
+    line-height: 1;
+    color: oklch(0.7 0.015 285.823);
+    font-family: var(--font-instrument-serif), serif;
+  }
+
+  .prose-custom blockquote::after {
+    content: """;
+    display: none;
+  }
+
+  .prose-custom code {
+    font-family: var(--font-geist-mono), monospace;
+    font-size: 0.875em;
+    background-color: oklch(0.95 0.005 285.823);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+  }
+
+  .prose-custom pre {
+    background-color: oklch(0.95 0.005 285.823);
+    border-radius: 8px;
+    padding: 1em 1.25em;
+    overflow-x: auto;
+    margin: 1.25em 0;
+  }
+
+  .prose-custom pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.875rem;
+  }
+
+  .prose-custom hr {
+    border: none;
+    text-align: center;
+    margin: 3em 0;
+    position: relative;
+  }
+
+  .prose-custom hr::before {
+    content: "· · ·";
+    color: oklch(0.5 0.015 285.823);
+    letter-spacing: 0.5em;
+    font-size: 1.25rem;
+  }
+
+  .prose-custom table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+    margin: 1.5em 0;
+    font-family: var(--font-plus-jakarta), sans-serif;
+  }
+
+  .prose-custom table th {
+    font-weight: 600;
+    text-align: left;
+    padding: 0.75em 1.25em;
+    border-bottom: 2px solid oklch(0.88 0.004 285.823);
+    color: var(--foreground);
+  }
+
+  .prose-custom table td {
+    padding: 0.75em 1.25em;
+    border-bottom: 1px solid oklch(0.92 0.004 285.823);
+    color: oklch(0.35 0.005 285.823);
+  }
+
+  .prose-custom table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .prose-custom img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1.5em 0;
+  }
 }

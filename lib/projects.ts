@@ -51,7 +51,7 @@ export const PROJECT_ICON = {
 } as const;
 
 export type ProjectListItem = {
-  href: `/projects/${string}`;
+  href: `/work/${string}`;
   slug: string;
   title: string;
   desc: string;
@@ -165,6 +165,15 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     subtitle: "Multi-tenant voice booking with Google Calendar + SMS.",
     overview:
       "Vocalenda gives each business a dedicated Twilio phone number where callers speak naturally with an AI agent. The agent answers business questions from stored configuration and books/reschedules/cancels on the business’s Google Calendar, then sends SMS confirmations from the same number.",
+    problemSolved: [
+      "Eliminate missed appointments from phone tag and voicemail",
+      "Reduce administrative burden of manual booking management",
+      "Provide 24/7 booking capability without staffing night shifts",
+      "Send automated SMS reminders to reduce no-shows",
+      "Handle common questions without human intervention",
+    ],
+    targetUser:
+      "Service-based businesses that book appointments: salons, clinics, gyms, consultants, and any professional who loses time to phone scheduling.",
     highlights: [
       "Dedicated Twilio number per business (multi-tenant)",
       "AI voice agent with real-time audio streaming",
@@ -277,6 +286,15 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     subtitle: "Automated content pipeline: URL → new video → publish.",
     overview:
       "Automan automates the process of taking a TikTok URL (and optionally additional URLs), extracting audio, generating a new avatar video via AI, and publishing it to multiple social platforms using SocialBee.",
+    problemSolved: [
+      "Manual video creation is time-intensive and requires recording equipment",
+      "Repurposing content across multiple platforms is repetitive and easy to skip",
+      "Maintaining a consistent posting schedule is difficult with manual production",
+      "Avatar videos add a personal touch without needing to appear on camera",
+      "Platform-specific optimization requires separate content for each channel",
+    ],
+    targetUser:
+      "Content creators, social media managers, and brands who want to maintain a consistent video presence without the overhead of manual video production.",
     highlights: [
       "Accepts 1–3 TikTok URLs per job",
       "Audio extraction and transcription",
@@ -576,6 +594,15 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
     subtitle: "Multi-tenant RAG chatbot platform for client websites.",
     overview:
       "Chat-Smith is a multi-tenant SaaS platform for creating and managing AI-powered RAG chatbots across multiple clients. Clients upload documents, customize the bot, and embed it on their site. Admin manages tenants, usage, and templates.",
+    problemSolved: [
+      "Businesses need 24/7 customer support but can't afford round-the-clock staff",
+      "Knowledge bases become outdated and inconsistent with manual updates",
+      "Slow response times drive customers away during peak periods",
+      "Embedding generic chatbots reduces customer trust and engagement",
+      "Managing multiple client chatbots becomes unwieldy without proper isolation",
+    ],
+    targetUser:
+      "Businesses with extensive documentation or knowledge bases: SaaS companies, e-commerce sites, and any organization whose customers frequently ask routine questions.",
     highlights: [
       "Two dashboards: admin (/admin) and client (/dashboard)",
       "Per-tenant document upload and knowledge base isolation",
@@ -722,7 +749,7 @@ export const PROJECT_DETAILS: Record<string, ProjectDetail> = {
 export const PROJECTS_ALL: ProjectListItem[] = Object.entries(
   PROJECT_DETAILS,
 ).map(([slug, p]) => ({
-  href: `/projects/${slug}`,
+  href: `/work/${slug}`,
   slug,
   title: p.title,
   desc: p.subtitle,

@@ -17,20 +17,14 @@ export default function Header() {
         <nav aria-label="Primary">
           <ul className="flex items-center gap-6">
             <li>
-              <Link
-                href="/projects"
-                className="link-underline-rtl text-lg sm:text-xl text-foreground/80 hover:text-foreground transition-colors"
-              >
-                Projects
-              </Link>
+              <span className="link-underline-rtl text-lg sm:text-xl text-foreground/50 cursor-default">
+                About
+              </span>
             </li>
             <li>
-              <Link
-                href="/#contact"
-                className="link-underline-rtl text-lg sm:text-xl text-foreground/80 hover:text-foreground transition-colors"
-              >
-                Contact
-              </Link>
+              <span className="link-underline-rtl text-lg sm:text-xl text-foreground/50 cursor-default">
+                Services
+              </span>
             </li>
           </ul>
         </nav>

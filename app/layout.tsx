@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { cookies, headers } from "next/headers";
 import Script from "next/script";
-import { Plus_Jakarta_Sans, Geist_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans, Geist_Mono, Fraunces, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -16,6 +16,19 @@ const jakartaSans = Plus_Jakarta_Sans({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  weight: "400",
   subsets: ["latin"],
   display: "swap",
 });
@@ -115,7 +128,7 @@ export default async function RootLayout({
         <link rel="preload" as="image" href="/projects/poster.jpg" />
       </head>
       <body
-        className={`${jakartaSans.variable} ${geistMono.variable} min-h-screen bg-background text-foreground antialiased font-sans`}
+        className={`${jakartaSans.variable} ${geistMono.variable} ${fraunces.variable} ${instrumentSerif.variable} min-h-screen bg-background text-foreground antialiased font-sans`}
       >
         <HomeThemeScroll />
         <a

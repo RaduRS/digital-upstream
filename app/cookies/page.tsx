@@ -6,7 +6,7 @@ import Container from "@/components/Container";
 export const metadata: Metadata = {
   title: "Cookies Policy",
   description:
-    "Learn how Digital Upstream uses cookies and analytics, and how to control your preference.",
+    "Learn how Digital Upstream uses cookies, affiliate tracking, and analytics, and how to control your preferences.",
   alternates: { canonical: "/cookies" },
 };
 
@@ -24,7 +24,8 @@ export default function CookiesPage() {
             </h1>
             <p className="text-base text-foreground/80 sm:text-lg">
               This policy explains how Digital Upstream uses cookies and similar
-              technologies, and how you can manage your choices.
+              technologies, including affiliate tracking, and how you can manage
+              your choices.
             </p>
             <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-foreground/70">
               <Link
@@ -34,7 +35,13 @@ export default function CookiesPage() {
                 Privacy policy
               </Link>
               <Link
-                href="/#contact"
+                href="/terms"
+                className="link-underline-rtl text-foreground"
+              >
+                Terms of service
+              </Link>
+              <Link
+                href="/work#contact"
                 className="link-underline-rtl text-foreground"
               >
                 Contact
@@ -43,23 +50,35 @@ export default function CookiesPage() {
           </div>
 
           <section className="space-y-3">
-            <h2 className="text-xl font-semibold sm:text-2xl">What we use</h2>
+            <h2 className="text-xl font-semibold sm:text-2xl">
+              What we use
+            </h2>
             <p className="text-foreground/80">
-              We only use analytics when you accept in the cookie banner. This
-              helps us understand aggregated usage (for example which pages are
-              visited) so we can improve the site.
+              We only use analytics when you accept in the cookie banner. We may
+              also use affiliate tracking cookies when you click on affiliate
+              links. This helps us understand aggregated usage and track
+              affiliate relationships.
             </p>
             <div className="space-y-2 text-foreground/80">
               <div className="flex items-start gap-3">
                 <span className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground/60" />
                 <p>
                   Google Analytics (provided by Google) to measure traffic and
-                  usage trends.
+                  usage trends. Only loaded when you accept analytics cookies.
                 </p>
               </div>
               <div className="flex items-start gap-3">
                 <span className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground/60" />
-                <p>A preference record that remembers your consent choice.</p>
+                <p>
+                  Affiliate tracking cookies to credit referrals. These may be
+                  set by affiliate partners when you click on affiliate links.
+                </p>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground/60" />
+                <p>
+                  A preference record that remembers your consent choice.
+                </p>
               </div>
             </div>
           </section>
@@ -67,9 +86,10 @@ export default function CookiesPage() {
           <section className="space-y-3">
             <h2 className="text-xl font-semibold sm:text-2xl">Your choices</h2>
             <p className="text-foreground/80">
-              You must accept or decline before continuing to use the site. If
-              you decline, we do not load Google Analytics. If you accept, we
-              load Google Analytics so we can improve performance and content.
+              You must accept or decline before continuing to use the site. If you
+              decline, we do not load Google Analytics or affiliate tracking
+              cookies. If you accept, we load these tools to help improve the
+              site and track affiliate relationships.
             </p>
           </section>
 
@@ -78,11 +98,24 @@ export default function CookiesPage() {
               Third-party processing
             </h2>
             <p className="text-foreground/80">
-              When enabled, Google Analytics may process data on our behalf. The
-              data collected via analytics may include information about your
-              device and how you interact with the site. Google may process data
-              in different countries. For details, review Google’s documentation
-              and policies.
+              When enabled, Google Analytics and our affiliate partners may
+              process data on our behalf. The data collected may include
+              information about your device and how you interact with the site.
+              Affiliate partners may process data in different countries. For
+              details, review their respective privacy policies.
+            </p>
+          </section>
+
+          <section className="space-y-3">
+            <h2 className="text-xl font-semibold sm:text-2xl">
+              Affiliate links
+            </h2>
+            <p className="text-foreground/80">
+              Some links on this site are affiliate links. When you click an
+              affiliate link, the affiliate partner may set a cookie to track
+              the referral. This is standard practice for affiliate marketing.
+              We disclose affiliate relationships clearly within our content in
+              accordance with advertising standards.
             </p>
           </section>
 
@@ -91,8 +124,9 @@ export default function CookiesPage() {
               How to change your preference
             </h2>
             <p className="text-foreground/80">
-              You can reset your choice at any time by clearing this site’s data
-              in your browser. The banner will appear again on your next visit.
+              You can reset your choice at any time by clearing this site&apos;s
+              data in your browser. The banner will appear again on your next
+              visit.
             </p>
           </section>
 
@@ -118,7 +152,7 @@ export default function CookiesPage() {
           name: "Cookies Policy",
           url: "https://digital-upstream.com/cookies",
           description:
-            "Learn how Digital Upstream uses cookies and analytics, and how to control your preference.",
+            "Learn how Digital Upstream uses cookies, affiliate tracking, and analytics, and how to control your preferences.",
           isPartOf: {
             "@type": "WebSite",
             name: "Digital Upstream",

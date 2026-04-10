@@ -6,7 +6,7 @@ import Container from "@/components/Container";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Learn how Digital Upstream handles personal data, analytics, and your privacy choices.",
+    "Learn how Digital Upstream handles personal data, analytics, affiliate tracking, and your privacy choices.",
   alternates: { canonical: "/privacy" },
 };
 
@@ -34,16 +34,16 @@ export default function PrivacyPolicyPage() {
                 Cookies policy
               </Link>
               <Link
-                href="/#contact"
+                href="/terms"
+                className="link-underline-rtl text-foreground"
+              >
+                Terms of service
+              </Link>
+              <Link
+                href="/work#contact"
                 className="link-underline-rtl text-foreground"
               >
                 Contact
-              </Link>
-              <Link
-                href="/projects"
-                className="link-underline-rtl text-foreground"
-              >
-                Projects
               </Link>
             </div>
           </div>
@@ -53,8 +53,8 @@ export default function PrivacyPolicyPage() {
               Who we are (controller)
             </h2>
             <p className="text-foreground/80">
-              Digital Upstream is responsible for the processing described in
-              this policy.
+              Digital Upstream is responsible for the processing described in this
+              policy.
             </p>
             <p className="text-foreground/80">
               You can reach us at{" "}
@@ -94,6 +94,13 @@ export default function PrivacyPolicyPage() {
                   explicitly accept analytics cookies in the consent banner.
                 </p>
               </div>
+              <div className="flex items-start gap-3">
+                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground/60" />
+                <p>
+                  Affiliate referral data from affiliate partners when you click
+                  on affiliate links on the site.
+                </p>
+              </div>
             </div>
           </section>
 
@@ -101,7 +108,8 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-xl font-semibold sm:text-2xl">Cookies</h2>
             <p className="text-foreground/80">
               We use cookies to remember your analytics preference and, if you
-              opt in, to enable Google Analytics. Details are in the{" "}
+              opt in, to enable Google Analytics and affiliate tracking. Details
+              are in the{" "}
               <Link
                 href="/cookies"
                 className="link-underline-rtl text-foreground"
@@ -134,6 +142,13 @@ export default function PrivacyPolicyPage() {
                   performance (analytics is optional and consent-based).
                 </p>
               </div>
+              <div className="flex items-start gap-3">
+                <span className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground/60" />
+                <p>
+                  To track affiliate referrals and credit partner relationships
+                  when you click affiliate links.
+                </p>
+              </div>
             </div>
           </section>
 
@@ -143,8 +158,8 @@ export default function PrivacyPolicyPage() {
               <div className="flex items-start gap-3">
                 <span className="mt-2 h-1.5 w-1.5 rounded-full bg-foreground/60" />
                 <p>
-                  Analytics cookies: your consent (you can accept or decline in
-                  the banner).
+                  Analytics and affiliate tracking cookies: your consent (you
+                  can accept or decline in the banner).
                 </p>
               </div>
               <div className="flex items-start gap-3">
@@ -168,8 +183,10 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-xl font-semibold sm:text-2xl">Sharing</h2>
             <p className="text-foreground/80">
               We may share data with service providers that help us run the
-              website. When analytics is enabled, Google acts as an analytics
-              provider for aggregated usage measurement.
+              website, including analytics providers and affiliate networks.
+              When analytics is enabled, Google acts as a data processor.
+              Affiliate partners may also process data in accordance with their
+              own privacy policies.
             </p>
           </section>
 
@@ -213,7 +230,7 @@ export default function PrivacyPolicyPage() {
           name: "Privacy Policy",
           url: "https://digital-upstream.com/privacy",
           description:
-            "Learn how Digital Upstream handles personal data, analytics, and your privacy choices.",
+            "Learn how Digital Upstream handles personal data, analytics, affiliate tracking, and your privacy choices.",
           isPartOf: {
             "@type": "WebSite",
             name: "Digital Upstream",

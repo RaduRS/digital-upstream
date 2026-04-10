@@ -127,7 +127,7 @@ export default function ProjectsPage() {
 
             <div className="mt-12 sm:mt-14">
               <Link
-                href="/#projects"
+                href="/work#projects"
                 className="link-underline-hide-ltr text-lg sm:text-xl text-foreground/80 hover:text-foreground transition-colors"
               >
                 Back to home projects

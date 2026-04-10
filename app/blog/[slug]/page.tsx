@@ -1,0 +1,245 @@
+import { sql } from "@/lib/db";
+import { notFound } from "next/navigation";
+import type { BlogPost } from "@/lib/blog";
+import type { Metadata } from "next";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import Container from "@/components/Container";
+import { marked } from "marked";
+import ReadingProgress from "@/components/ReadingProgress";
+
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+async function getPost(slug: string): Promise<BlogPost | null> {
+  try {
+    const posts = await sql`
+      SELECT
+        id, title, slug, meta_description, target_keywords,
+        content, cover_image_url, secondary_image_url,
+        source, original_url, published_at,
+        created_at, updated_at
+      FROM blog
+      WHERE slug = ${slug}
+    `;
+    return (posts[0] as BlogPost) ?? null;
+  } catch {
+    return null;
+  }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPost(slug);
+
+  if (!post) {
+    return { title: "Post Not Found" };
+  }
+
+  const title = `${post.title} | Digital Upstream`;
+  const description = post.meta_description ?? post.title;
+  const canonical = `https://digital-upstream.com/blog/${slug}`;
+  const ogImage = post.cover_image_url ?? "https://digital-upstream.com/digital-upstream-logo.png";
+
+  return {
+    title,
+    description,
+    keywords: post.target_keywords ?? undefined,
+    alternates: { canonical },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      type: "article",
+      publishedTime: post.published_at?.toString(),
+      modifiedTime: post.updated_at.toString(),
+      images: [{ url: ogImage, width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
+  };
+}
+
+function formatDate(date: Date | string | null): string {
+  if (!date) return "";
+  const d = new Date(date);
+  return d.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+function estimateReadTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / wordsPerMinute));
+}
+
+export default async function BlogPostPage({ params }: Props) {
+  const { slug } = await params;
+  const post = await getPost(slug);
+
+  if (!post) {
+    notFound();
+  }
+
+  marked.setOptions({
+    gfm: true,
+    breaks: false,
+  });
+
+  const contentHtml = await marked(post.content);
+  const readTime = estimateReadTime(post.content);
+
+  return (
+    <>
+      <ReadingProgress />
+      <main id="content" className="min-h-screen">
+        {/* Article header */}
+        <header className="pt-12 sm:pt-16 pb-8 sm:pb-12">
+          <Container>
+            <div className="max-w-3xl mx-auto">
+              {/* Back link */}
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 text-sm text-foreground/50 hover:text-foreground transition-colors mb-10 sm:mb-14 group"
+              >
+                <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                <span className="font-sans">All Articles</span>
+              </Link>
+
+              {/* Meta line */}
+              <div className="flex items-center justify-between gap-3 mb-6">
+                <div className="flex items-center gap-3">
+                  <time
+                    dateTime={post.published_at?.toString()}
+                    className="text-xs uppercase tracking-[0.15em] text-foreground/40 font-sans"
+                  >
+                    {formatDate(post.published_at)}
+                  </time>
+                  <span className="w-1 h-1 rounded-full bg-foreground/20" />
+                  <span className="text-xs text-foreground/40 font-sans">
+                    {readTime} min read
+                  </span>
+                </div>
+                <span className="text-xs uppercase tracking-[0.15em] text-foreground/40 font-sans">
+                  Author: Radu
+                </span>
+              </div>
+
+              {/* Title */}
+              <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-medium leading-[1.05] tracking-tight text-foreground mb-6">
+                {post.title}
+              </h1>
+
+              {/* Meta description / subtitle */}
+              {post.meta_description && (
+                <p className="text-lg sm:text-xl text-foreground/55 leading-relaxed font-sans max-w-2xl mb-10">
+                  {post.meta_description}
+                </p>
+              )}
+              <hr className="border-t border-foreground/10 mb-0" />
+            </div>
+          </Container>
+        </header>
+
+        {/* Cover image */}
+        {post.cover_image_url && (
+          <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16">
+            <div className="aspect-[16/9] w-full overflow-hidden rounded-lg sm:rounded-xl bg-foreground/5">
+              <img
+                src={post.cover_image_url}
+                alt={post.title}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Article content */}
+        <article className="pb-20 sm:pb-28 lg:pb-36">
+          <Container>
+            <div className="max-w-3xl mx-auto">
+              <div
+                className="prose-custom"
+                dangerouslySetInnerHTML={{ __html: contentHtml }}
+              />
+            </div>
+          </Container>
+        </article>
+
+        {/* Article footer */}
+        <footer className="border-t border-foreground/10 py-12 sm:py-16">
+          <Container>
+            <div className="max-w-3xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+              <Link
+                href="/"
+                className="inline-flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors group"
+              >
+                <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+                <span className="font-sans text-sm">Back to all articles</span>
+              </Link>
+              <div className="flex items-center gap-4">
+                <span className="text-xs text-foreground/40 font-sans uppercase tracking-widest">
+                  Share
+                </span>
+                <a
+                  href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(`https://digital-upstream.com/blog/${post.slug}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-foreground/40 hover:text-foreground transition-colors"
+                  aria-label="Share on Twitter"
+                >
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </Container>
+        </footer>
+
+        {/* JSON-LD */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              headline: post.title,
+              description: post.meta_description ?? post.title,
+              image: post.cover_image_url,
+              datePublished: post.published_at?.toString(),
+              dateModified: post.updated_at.toString(),
+              url: `https://digital-upstream.com/blog/${post.slug}`,
+              author: {
+                "@type": "Organization",
+                name: "Digital Upstream",
+                url: "https://digital-upstream.com",
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "Digital Upstream",
+                url: "https://digital-upstream.com",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://digital-upstream.com/digital-upstream-logo.png",
+                },
+              },
+              mainEntityOfPage: {
+                "@type": "WebPage",
+                "@id": `https://digital-upstream.com/blog/${post.slug}`,
+              },
+            }),
+          }}
+        />
+      </main>
+    </>
+  );
+}

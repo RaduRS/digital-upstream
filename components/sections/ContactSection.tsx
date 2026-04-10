@@ -10,7 +10,7 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      className="h-screen flex items-center"
+      className="min-h-screen flex items-center py-16 sm:py-24"
       aria-labelledby="contact-title"
     >
       <Container>
@@ -46,7 +46,7 @@ export default function ContactSection() {
                   Email me
                 </Link>
                 <Link
-                  href="#projects"
+                  href="/work#projects"
                   className="inline-block text-lg sm:text-xl link-underline-hide-ltr link-underline-tight text-foreground/80 hover:text-foreground transition-colors"
                   aria-label="See my projects"
                 >
