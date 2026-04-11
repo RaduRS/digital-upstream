@@ -22,9 +22,14 @@ export default function Header() {
               </span>
             </li>
             <li>
-              <span className="link-underline-rtl text-lg sm:text-xl text-foreground/50 cursor-default">
-                Services
-              </span>
+              <a
+                href="https://newsletter.digital-upstream.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-underline-rtl text-lg sm:text-xl text-foreground/50 hover:text-foreground transition-colors"
+              >
+                Newsletter
+              </a>
             </li>
           </ul>
         </nav>
