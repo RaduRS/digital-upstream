@@ -156,9 +156,9 @@ export default function AdminPage() {
     const lines: string[] = [];
 
     for (const post of selectedPosts) {
-      lines.push(post.title.toUpperCase());
+      lines.push(`# ${post.title}`);
       lines.push("");
-      lines.push(stripMarkdown(post.content));
+      lines.push(post.content.trim());
       lines.push("\n---\n");
     }
 
