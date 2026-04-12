@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Container from "@/components/Container";
 import Logo from "@/components/Logo";
-import { Check, LogOut, Copy, CheckCheck } from "lucide-react";
+import { Check, LogOut, Copy, CheckCheck, Download } from "lucide-react";
 
 type Post = {
   id: string;
@@ -12,6 +12,9 @@ type Post = {
   slug: string;
   meta_description: string | null;
   content: string;
+  cover_image_url: string | null;
+  video_url: string | null;
+  video_thumbnail_url: string | null;
   published_at: string | null;
 };
 
@@ -279,6 +282,36 @@ export default function AdminPage() {
                           {formatDate(post.published_at)}
                         </p>
                       </div>
+                      {selected.has(post.id) && (
+                        <div className="flex items-center gap-2 shrink-0">
+                          {post.video_url && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                window.open(post.video_url!, "_blank");
+                              }}
+                              className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-foreground/15 text-foreground/60 hover:text-foreground hover:border-foreground/30 transition-colors font-sans text-xs"
+                              title="Download video"
+                            >
+                              <Download className="h-3.5 w-3.5" />
+                              Video
+                            </button>
+                          )}
+                          {post.cover_image_url && (
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                window.open(post.cover_image_url!, "_blank");
+                              }}
+                              className="flex items-center gap-1.5 px-3 py-1.5 rounded border border-foreground/15 text-foreground/60 hover:text-foreground hover:border-foreground/30 transition-colors font-sans text-xs"
+                              title="Download cover"
+                            >
+                              <Download className="h-3.5 w-3.5" />
+                              Cover
+                            </button>
+                          )}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>
