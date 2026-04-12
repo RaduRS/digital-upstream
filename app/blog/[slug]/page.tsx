@@ -7,6 +7,7 @@ import Link from "next/link";
 import Container from "@/components/Container";
 import { marked } from "marked";
 import ReadingProgress from "@/components/ReadingProgress";
+import FloatingShare from "@/components/FloatingShare";
 
 
 type Props = {
@@ -105,6 +106,7 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <>
       <ReadingProgress />
+      <FloatingShare title={post.title} slug={post.slug} />
       <main id="content" className="min-h-screen">
         {/* Article header */}
         <header className="pt-12 sm:pt-16 pb-8 sm:pb-12">

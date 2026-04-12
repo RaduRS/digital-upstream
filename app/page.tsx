@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { sql } from "@/lib/db";
 import type { BlogPostSummary } from "@/lib/blog";
-import { FileText, ArrowRight } from "lucide-react";
+import { FileText, ArrowRight, Clock } from "lucide-react";
 import Container from "@/components/Container";
 import type { Metadata } from "next";
 
@@ -35,7 +35,8 @@ async function getPosts(): Promise<BlogPostSummary[]> {
       SELECT
         id, title, slug, meta_description, target_keywords,
         cover_image_url, source, original_url, published_at,
-        created_at, updated_at
+        created_at, updated_at,
+        content
       FROM blog
       WHERE source = 'digital-upstream'
       ORDER BY published_at DESC NULLS LAST
@@ -44,6 +45,12 @@ async function getPosts(): Promise<BlogPostSummary[]> {
   } catch {
     return [];
   }
+}
+
+function estimateReadTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = (content || "").trim().split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / wordsPerMinute));
 }
 
 function formatDate(date: Date | string | null): string {
@@ -96,13 +103,15 @@ export default async function BlogPage() {
             <div className="max-w-3xl mx-auto w-full">
               <Link href={`/blog/${featured.slug}`} className="group block">
                 <article>
-                  {/* Date */}
-                  <div className="flex items-center gap-2 mb-4">
+                  {/* Date + read time */}
+                  <div className="flex items-center justify-between gap-2 mb-4">
                     <time dateTime={formatDateISO(featured.published_at)} className="text-xs text-foreground/40 font-sans">
                       {formatDate(featured.published_at)}
                     </time>
-                    <span className="w-1 h-1 rounded-full bg-foreground/20" />
-                    <span className="text-xs text-foreground/40 font-sans">Latest</span>
+                    <span className="flex items-center gap-1 text-xs text-foreground/40 font-sans">
+                      <Clock className="h-3 w-3" />
+                      {estimateReadTime((featured as any).content || "")} min
+                    </span>
                   </div>
 
                   {/* Cover image */}
@@ -170,9 +179,15 @@ export default async function BlogPage() {
                             )}
                             {/* Text right */}
                             <div className="flex-1 min-w-0 flex flex-col justify-center">
-                              <time dateTime={formatDateISO(post.published_at)} className="text-xs text-foreground/40 font-sans block mb-1.5">
-                                {formatDate(post.published_at)}
-                              </time>
+                              <div className="flex items-center justify-between gap-2 mb-1.5">
+                                <time dateTime={formatDateISO(post.published_at)} className="text-xs text-foreground/40 font-sans">
+                                  {formatDate(post.published_at)}
+                                </time>
+                                <span className="flex items-center gap-1 text-xs text-foreground/40 font-sans">
+                                  <Clock className="h-3 w-3" />
+                                  {estimateReadTime((post as any).content || "")} min
+                                </span>
+                              </div>
                               <h3 className="font-serif text-base sm:text-lg lg:text-xl font-medium leading-snug tracking-tight text-foreground group-hover:text-foreground/70 transition-colors mb-1">
                                 {post.title}
                               </h3>
@@ -206,9 +221,15 @@ export default async function BlogPage() {
                             {/* Gradient overlay with text */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                             <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5">
-                              <time dateTime={formatDateISO(post.published_at)} className="text-xs text-white/60 font-sans block mb-1.5">
-                                {formatDate(post.published_at)}
-                              </time>
+                              <div className="flex items-center justify-between gap-2 mb-1.5">
+                                <time dateTime={formatDateISO(post.published_at)} className="text-xs text-white/60 font-sans">
+                                  {formatDate(post.published_at)}
+                                </time>
+                                <span className="flex items-center gap-1 text-xs text-white/60 font-sans">
+                                  <Clock className="h-3 w-3" />
+                                  {estimateReadTime((post as any).content || "")} min
+                                </span>
+                              </div>
                               <h3 className="font-serif text-base sm:text-lg lg:text-xl font-medium leading-snug tracking-tight text-white group-hover:text-white/80 transition-colors mb-0.5">
                                 {post.title}
                               </h3>

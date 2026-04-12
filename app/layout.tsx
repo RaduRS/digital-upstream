@@ -148,7 +148,11 @@ export default async function RootLayout({
             name: "Digital Upstream",
             url: "https://digital-upstream.com",
             logo: "https://digital-upstream.com/digital-upstream-logo.png",
-            sameAs: ["https://www.tiktok.com/@digitalupstream"],
+            sameAs: [
+              "https://www.tiktok.com/@digitalupstream",
+              "https://www.instagram.com/digital.upstream",
+              "https://x.com/DUpstream83810",
+            ],
             contactPoint: [
               {
                 "@type": "ContactPoint",
@@ -167,7 +171,11 @@ export default async function RootLayout({
             url: "https://digital-upstream.com",
             description: "Web development, UI/UX, and product design services.",
             email: "contact@digital-upstream.com",
-            sameAs: ["https://www.tiktok.com/@digitalupstream"],
+            sameAs: [
+              "https://www.tiktok.com/@digitalupstream",
+              "https://www.instagram.com/digital.upstream",
+              "https://x.com/DUpstream83810",
+            ],
             areaServed: "Worldwide",
             serviceType: ["Web development", "UI/UX design", "Branding"],
           })}
