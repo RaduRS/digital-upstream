@@ -6,24 +6,26 @@ import Container from "@/components/Container";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Digital Upstream",
+  title: "Digital Upstream — AI Tools, Web Dev & Indie Builder Insights",
   description:
-    "Thoughts, insights, and perspectives on web development, design, and building products.",
-  keywords: ["web development", "design", "frontend", "UI/UX", "Next.js", "React", "brand design", "portfolio", "blog"],
+    "Honest reviews and perspectives on AI coding tools, web development, and building products that hold up under scrutiny. By Radu.",
+  keywords: ["AI coding tools", "web development", "frontend", "indie founders", "SaaS", "brand design", "Cursor", "Copilot"],
   alternates: { canonical: "/" },
   openGraph: {
     title: "Digital Upstream",
     description:
-      "Thoughts, insights, and perspectives on web development, design, and building products.",
+      "Honest reviews and perspectives on AI coding tools, web development, and building products that hold up under scrutiny.",
     siteName: "Digital Upstream",
     url: "https://digital-upstream.com",
     type: "website",
+    images: [{ url: "https://digital-upstream.com/digital-upstream-logo.png", width: 1200, height: 630, alt: "Digital Upstream" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Digital Upstream",
     description:
-      "Thoughts, insights, and perspectives on web development, design, and building products.",
+      "Honest reviews and perspectives on AI coding tools, web development, and building products.",
+    images: ["https://digital-upstream.com/digital-upstream-logo.png"],
   },
 };
 
@@ -49,66 +51,93 @@ function formatDate(date: Date | string | null): string {
   const d = new Date(date);
   return d.toLocaleDateString("en-US", {
     year: "numeric",
-    month: "long",
+    month: "short",
     day: "numeric",
   });
+}
+
+function formatDateISO(date: Date | string | null): string {
+  if (!date) return "";
+  return new Date(date).toISOString();
 }
 
 export default async function BlogPage() {
   const posts = await getPosts();
   const featured = posts[0];
-  const latest = posts.slice(1, 4);
-  const remaining = posts.slice(4);
+  const latest = posts.slice(1, 7);
 
   return (
     <main id="content" className="min-h-screen">
 
-      {/* Hero - Featured Article */}
+      {/* Site Header */}
+      <section className="pt-12 pb-10 sm:pt-16 sm:pb-12 border-b border-foreground/10">
+        <Container>
+          <div className="max-w-3xl mx-auto w-full">
+            {/* Publication identity */}
+            <div className="flex items-center gap-2 mb-6">
+              <FileText className="h-3 w-3 text-foreground/30" />
+              <span className="text-xs uppercase tracking-[0.2em] text-foreground/40 font-sans">
+                Publication
+              </span>
+            </div>
+
+            <h1 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium leading-[1.1] tracking-tight text-foreground mb-4">
+              Digital Upstream
+            </h1>
+            <p className="text-base sm:text-lg text-foreground/55 leading-relaxed font-sans">
+              Honest takes on AI coding tools, web development, and building products that hold up under scrutiny.
+              By Radu — founder and developer.
+            </p>
+          </div>
+        </Container>
+      </section>
+
+      {/* Featured Article */}
       {featured && (
-        <section className="pt-12 pb-8 sm:pt-16 sm:pb-10">
+        <section className="py-10 sm:py-14">
           <Container>
-            <div className="max-w-5xl mx-auto w-full">
-              {/* Section label */}
-              <div className="flex items-center gap-2 mb-8 sm:mb-10">
-                <FileText className="h-3 w-3 text-foreground/30" />
-                <span className="text-xs uppercase tracking-[0.2em] text-foreground/40 font-sans">
-                  Featured
-                </span>
+            <div className="max-w-3xl mx-auto w-full">
+              {/* Date + section label */}
+              <div className="flex items-center gap-3 mb-6">
+                <time
+                  dateTime={formatDateISO(featured.published_at)}
+                  className="text-xs text-foreground/40 font-sans"
+                >
+                  {formatDate(featured.published_at)}
+                </time>
+                <span className="w-1 h-1 rounded-full bg-foreground/20" />
+                <span className="text-xs text-foreground/40 font-sans">Latest</span>
               </div>
 
               <Link href={`/blog/${featured.slug}`} className="group block">
                 <article>
+                  {/* Cover image */}
                   {featured.cover_image_url && (
-                    <div className="aspect-[16/9] w-full overflow-hidden rounded-lg sm:rounded-xl mb-8 sm:mb-10">
+                    <div className="aspect-[16/9] w-full overflow-hidden rounded-lg mb-6 bg-foreground/5">
                       <img
                         src={featured.cover_image_url}
                         alt=""
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.01]"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                       />
                     </div>
                   )}
-                  <div className="max-w-3xl">
-                    <div className="flex items-center gap-3 mb-4">
-                      <time className="text-xs uppercase tracking-[0.15em] text-foreground/40 font-sans">
-                        {formatDate(featured.published_at)}
-                      </time>
-                      <span className="w-1 h-1 rounded-full bg-foreground/20" />
-                      <span className="text-xs text-foreground/40 font-sans">
-                        Author: Radu
-                      </span>
-                    </div>
-                    <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-medium leading-[1.05] tracking-tight text-foreground mb-4 group-hover:text-foreground/70 transition-colors">
-                      {featured.title}
-                    </h2>
-                    {featured.meta_description && (
-                      <p className="text-lg sm:text-xl text-foreground/60 leading-relaxed">
-                        {featured.meta_description}
-                      </p>
-                    )}
-                    <div className="mt-6 flex items-center gap-2 font-serif text-sm text-foreground/50 group-hover:text-foreground transition-colors">
-                      <span>Read article</span>
-                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </div>
+
+                  {/* Title */}
+                  <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-medium leading-[1.1] tracking-tight text-foreground mb-3 group-hover:text-foreground/70 transition-colors">
+                    {featured.title}
+                  </h2>
+
+                  {/* Excerpt */}
+                  {featured.meta_description && (
+                    <p className="text-base sm:text-lg text-foreground/55 leading-relaxed mb-5">
+                      {featured.meta_description}
+                    </p>
+                  )}
+
+                  {/* CTA */}
+                  <div className="flex items-center gap-2 font-sans text-sm text-foreground/50 group-hover:text-foreground transition-colors">
+                    <span className="text-sm">Read article</span>
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </article>
               </Link>
@@ -119,119 +148,59 @@ export default async function BlogPage() {
 
       {/* Divider */}
       {featured && posts.length > 1 && (
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6">
           <hr className="border-foreground/10" />
         </div>
       )}
 
-      {/* Latest Articles - 3 column grid */}
-      {latest.length > 0 && (
-        <section className="py-10 sm:py-14">
+      {/* All Posts — Clean list */}
+      {posts.length > 0 && (
+        <section className="pb-16 sm:pb-24">
           <Container>
-            <div className="max-w-5xl mx-auto w-full">
-              {/* Section header */}
-              <div className="flex items-center justify-between mb-8 sm:mb-10">
-                <h2 className="font-sans text-xs uppercase tracking-[0.15em] text-foreground/40">
-                  Latest
-                </h2>
-                <div className="flex items-center gap-2 text-foreground/30">
-                  <FileText className="h-3 w-3" />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8">
-                {latest.map((post) => (
-                  <Link
-                    key={post.id}
-                    href={`/blog/${post.slug}`}
-                    className="group block"
-                  >
-                    <article className="space-y-4">
-                      {post.cover_image_url && (
-                        <div className="aspect-[16/10] w-full overflow-hidden rounded-lg">
-                          <img
-                            src={post.cover_image_url}
-                            alt=""
-                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                          />
-                        </div>
+            <div className="max-w-3xl mx-auto w-full">
+              <div className="pt-8 sm:pt-10">
+                <h2 className="sr-only">All Articles</h2>
+                <div className="space-y-0">
+                  {posts.map((post, index) => (
+                    <div key={post.id}>
+                      {index > 0 && (
+                        <hr className="border-foreground/10" />
                       )}
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-2">
-                          <time className="text-xs text-foreground/40 font-sans">
-                            {formatDate(post.published_at)}
-                          </time>
-                        </div>
-                        <h3 className="font-serif text-xl sm:text-2xl font-medium leading-snug tracking-tight text-foreground group-hover:text-foreground/70 transition-colors">
-                          {post.title}
-                        </h3>
-                        {post.meta_description && (
-                          <p className="text-sm text-foreground/55 leading-relaxed line-clamp-2">
-                            {post.meta_description}
-                          </p>
-                        )}
-                      </div>
-                    </article>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </Container>
-        </section>
-      )}
-
-      {/* More Articles - condensed list */}
-      {remaining.length > 0 && (
-        <>
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-            <hr className="border-foreground/10" />
-          </div>
-          <section className="py-10 sm:py-14">
-            <Container>
-              <div className="max-w-5xl mx-auto w-full">
-                <h2 className="font-sans text-xs uppercase tracking-[0.15em] text-foreground/40 mb-8 sm:mb-10">
-                  More Stories
-                </h2>
-                <div className="space-y-8">
-                  {remaining.map((post) => (
-                    <Link
-                      key={post.id}
-                      href={`/blog/${post.slug}`}
-                      className="group block"
-                    >
-                      <article className="flex items-start gap-6">
-                        {post.cover_image_url && (
-                          <div className="w-32 h-20 sm:w-40 sm:h-28 shrink-0 overflow-hidden rounded-lg">
-                            <img
-                              src={post.cover_image_url}
-                              alt=""
-                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                            />
-                          </div>
-                        )}
-                        <div className="flex-1 min-w-0">
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="group block py-7 sm:py-8"
+                      >
+                        <article>
+                          {/* Date */}
                           <div className="flex items-center gap-2 mb-2">
-                            <time className="text-xs text-foreground/40 font-sans">
+                            <time
+                              dateTime={formatDateISO(post.published_at)}
+                              className="text-xs text-foreground/40 font-sans"
+                            >
                               {formatDate(post.published_at)}
                             </time>
                           </div>
-                          <h3 className="font-serif text-lg sm:text-xl font-medium leading-snug tracking-tight text-foreground group-hover:text-foreground/70 transition-colors mb-1">
+
+                          {/* Title */}
+                          <h3 className="font-serif text-xl sm:text-2xl font-medium leading-snug tracking-tight text-foreground group-hover:text-foreground/70 transition-colors mb-1.5">
                             {post.title}
                           </h3>
+
+                          {/* Excerpt */}
                           {post.meta_description && (
                             <p className="text-sm text-foreground/50 leading-relaxed line-clamp-2">
                               {post.meta_description}
                             </p>
                           )}
-                        </div>
-                      </article>
-                    </Link>
+                        </article>
+                      </Link>
+                    </div>
                   ))}
                 </div>
               </div>
-            </Container>
-          </section>
-        </>
+            </div>
+          </Container>
+        </section>
       )}
 
       {/* Empty state */}
@@ -239,30 +208,55 @@ export default async function BlogPage() {
         <section className="py-24 sm:py-32">
           <Container>
             <div className="max-w-2xl mx-auto text-center">
-              <FileText className="h-12 w-12 text-foreground/20 mx-auto mb-6" />
-              <h1 className="font-serif text-3xl sm:text-4xl font-medium text-foreground/70 mb-4">
-                Coming Soon
-              </h1>
-              <p className="text-foreground/50 font-sans">
-                Thoughts, insights, and perspectives on web development, design, and building products. Check back soon.
+              <p className="text-foreground/50 font-sans text-base">
+                No articles yet. Check back soon.
               </p>
             </div>
           </Container>
         </section>
       )}
 
-      {/* JSON-LD */}
+      {/* JSON-LD — WebSite + Blog schema */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Blog",
-            name: "Digital Upstream",
-            description:
-              "Thoughts, insights, and perspectives on web development, design, and building products.",
-            url: "https://digital-upstream.com",
-          }),
+          __html: JSON.stringify([
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "Digital Upstream",
+              url: "https://digital-upstream.com",
+              description:
+                "Honest takes on AI coding tools, web development, and building products that hold up under scrutiny.",
+              publisher: {
+                "@type": "Person",
+                name: "Radu",
+                url: "https://digital-upstream.com/about",
+              },
+              potentialAction: {
+                "@type": "SearchAction",
+                target: "https://digital-upstream.com/?q={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "Blog",
+              name: "Digital Upstream",
+              url: "https://digital-upstream.com",
+              description:
+                "Honest takes on AI coding tools, web development, and building products.",
+              author: {
+                "@type": "Person",
+                name: "Radu",
+                url: "https://digital-upstream.com/about",
+              },
+              publisher: {
+                "@type": "Person",
+                name: "Radu",
+              },
+            },
+          ]),
         }}
       />
     </main>
