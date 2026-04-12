@@ -33,7 +33,7 @@ export default function FloatingShare({ title, slug }: FloatingShareProps) {
       style={{
         position: "fixed",
         top: "50%",
-        marginLeft: "calc(50vw - 384px - 56px - 20px)",
+        marginLeft: "calc(50vw - 384px - 84px - 20px)",
         transform: "translateY(-50%)",
         zIndex: 40,
         display: "flex",

@@ -186,7 +186,8 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Video */}
         {post.video_url && (
-          <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16">
+          <Container>
+            <div className="max-w-3xl mx-auto mb-12 sm:mb-16">
             {post.video_thumbnail_url ? (
               <div className="relative aspect-video overflow-hidden rounded-lg sm:rounded-xl bg-foreground/5">
                 <video
@@ -208,6 +209,7 @@ export default async function BlogPostPage({ params }: Props) {
               </div>
             )}
           </div>
+          </Container>
         )}
 
         {/* Secondary images */}
