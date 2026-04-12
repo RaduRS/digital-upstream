@@ -8,6 +8,7 @@ import Container from "@/components/Container";
 import { marked } from "marked";
 import ReadingProgress from "@/components/ReadingProgress";
 
+
 type Props = {
   params: Promise<{ slug: string }>;
 };
@@ -18,6 +19,7 @@ async function getPost(slug: string): Promise<BlogPost | null> {
       SELECT
         id, title, slug, meta_description, target_keywords,
         content, cover_image_url, secondary_image_url,
+        video_url, video_thumbnail_url,
         source, original_url, published_at,
         created_at, updated_at
       FROM blog
@@ -94,7 +96,10 @@ export default async function BlogPostPage({ params }: Props) {
     breaks: false,
   });
 
-  const contentHtml = await marked(post.content);
+  // Remove the first image from content to avoid duplicate with cover image
+  const cleanContent = post.content.replace(/^!\[[^\]]*\]\([^)]+\)\n?/, "");
+
+  const contentHtml = await marked(cleanContent);
   const readTime = estimateReadTime(post.content);
 
   return (
@@ -151,15 +156,17 @@ export default async function BlogPostPage({ params }: Props) {
 
         {/* Cover image */}
         {post.cover_image_url && (
-          <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16">
-            <div className="aspect-[16/9] w-full overflow-hidden rounded-lg sm:rounded-xl bg-foreground/5">
-              <img
-                src={post.cover_image_url}
-                alt={post.title}
-                className="w-full h-full object-cover"
-              />
+          <Container>
+            <div className="max-w-3xl mx-auto mb-10 sm:mb-12">
+              <div className="aspect-[16/9] w-full overflow-hidden rounded-lg sm:rounded-xl bg-foreground/5">
+                <img
+                  src={post.cover_image_url}
+                  alt={post.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
             </div>
-          </div>
+          </Container>
         )}
 
         {/* Article content */}
@@ -173,6 +180,61 @@ export default async function BlogPostPage({ params }: Props) {
             </div>
           </Container>
         </article>
+
+        {/* Video */}
+        {post.video_url && (
+          <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 sm:mb-16">
+            {post.video_thumbnail_url ? (
+              <div className="relative aspect-video overflow-hidden rounded-lg sm:rounded-xl bg-foreground/5">
+                <video
+                  src={post.video_url}
+                  poster={post.video_thumbnail_url}
+                  controls
+                  preload="metadata"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            ) : (
+              <div className="aspect-video overflow-hidden rounded-lg sm:rounded-xl bg-foreground/5">
+                <video
+                  src={post.video_url}
+                  controls
+                  preload="metadata"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Secondary images */}
+        {post.secondary_image_url && (() => {
+          // Handle both array format ["url1","url2"] and object format {"key": "url"}
+          const urls: string[] = [];
+          if (Array.isArray(post.secondary_image_url)) {
+            urls.push(...post.secondary_image_url.filter(u => typeof u === "string"));
+          } else if (typeof post.secondary_image_url === "object") {
+            Object.values(post.secondary_image_url).forEach(v => {
+              if (typeof v === "string") urls.push(v);
+            });
+          }
+          if (urls.length === 0) return null;
+          return (
+            <section className="py-10 sm:py-14 border-t border-foreground/10">
+              <Container>
+                <div className="max-w-5xl mx-auto">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {urls.map((url, i) => (
+                      <div key={i} className="aspect-[16/9] overflow-hidden rounded-lg bg-foreground/5">
+                        <img src={url} alt="" className="w-full h-full object-cover" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </Container>
+            </section>
+          );
+        })()}
 
         {/* Article footer */}
         <footer className="border-t border-foreground/10 py-12 sm:py-16">
