@@ -15,6 +15,34 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+// In-memory slug cache to detect new posts
+let cachedSlugs: string[] = [];
+
+async function revalidateIfNewPosts() {
+  try {
+    const posts = await sql`
+      SELECT slug FROM blog WHERE source = 'digital-upstream' AND status = 'published'
+    `;
+    const currentSlugs = (posts as {slug: string}[]).map(p => p.slug);
+
+    const newSlugs = currentSlugs.filter(s => !cachedSlugs.includes(s));
+    if (newSlugs.length > 0 && cachedSlugs.length > 0) {
+      try {
+        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || "https://digital-upstream.com"}/api/revalidate`, {
+          method: "POST",
+          cache: "no-store",
+        });
+      } catch {
+        // Silently fail
+      }
+    }
+
+    cachedSlugs = currentSlugs;
+  } catch {
+    // Silently fail
+  }
+}
+
 async function getPost(slug: string): Promise<BlogPost | null> {
   try {
     const posts = await sql`
@@ -86,6 +114,7 @@ function estimateReadTime(content: string): number {
 }
 
 export default async function BlogPostPage({ params }: Props) {
+  await revalidateIfNewPosts();
   const { slug } = await params;
   const post = await getPost(slug);
 

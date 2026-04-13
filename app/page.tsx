@@ -47,6 +47,29 @@ async function getPosts(): Promise<BlogPostSummary[]> {
   }
 }
 
+// Simple in-memory slug cache to detect new posts
+let cachedSlugs: string[] = [];
+
+async function revalidateIfNewPosts() {
+  const posts = await getPosts();
+  const currentSlugs = posts.map(p => p.slug);
+
+  const newSlugs = currentSlugs.filter(s => !cachedSlugs.includes(s));
+  if (newSlugs.length > 0 && cachedSlugs.length > 0) {
+    // New post detected — trigger revalidation
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || "https://digital-upstream.com"}/api/revalidate`, {
+        method: "POST",
+        cache: "no-store",
+      });
+    } catch {
+      // Silently fail — next request will retry
+    }
+  }
+
+  cachedSlugs = currentSlugs;
+}
+
 function estimateReadTime(content: string): number {
   const wordsPerMinute = 200;
   const words = (content || "").trim().split(/\s+/).length;
@@ -69,6 +92,7 @@ function formatDateISO(date: Date | string | null): string {
 }
 
 export default async function BlogPage() {
+  await revalidateIfNewPosts();
   const posts = await getPosts();
   const featured = posts[0];
   const rest = posts.slice(1);
