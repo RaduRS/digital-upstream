@@ -102,7 +102,7 @@ export default function Footer() {
                 Instagram
               </a>
               <a
-                href="https://x.com/DUpstream83810"
+                href="https://x.com/Digi_Upstream"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"

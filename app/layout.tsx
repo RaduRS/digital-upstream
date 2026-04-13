@@ -151,7 +151,7 @@ export default async function RootLayout({
             sameAs: [
               "https://www.tiktok.com/@digitalupstream",
               "https://www.instagram.com/digital.upstream",
-              "https://x.com/DUpstream83810",
+              "https://x.com/Digi_Upstream",
             ],
             contactPoint: [
               {
@@ -174,7 +174,7 @@ export default async function RootLayout({
             sameAs: [
               "https://www.tiktok.com/@digitalupstream",
               "https://www.instagram.com/digital.upstream",
-              "https://x.com/DUpstream83810",
+              "https://x.com/Digi_Upstream",
             ],
             areaServed: "Worldwide",
             serviceType: ["Web development", "UI/UX design", "Branding"],
