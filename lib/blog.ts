@@ -12,6 +12,7 @@ export type BlogPost = {
   source: string;
   original_url: string | null;
   published_at: Date | null;
+  status: "published" | "draft" | "review";
   created_at: Date;
   updated_at: Date;
 };

@@ -25,7 +25,7 @@ async function getPost(slug: string): Promise<BlogPost | null> {
         source, original_url, published_at,
         created_at, updated_at
       FROM blog
-      WHERE slug = ${slug}
+      WHERE slug = ${slug} AND status = 'published'
     `;
     return (posts[0] as BlogPost) ?? null;
   } catch {

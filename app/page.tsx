@@ -38,7 +38,7 @@ async function getPosts(): Promise<BlogPostSummary[]> {
         created_at, updated_at,
         content
       FROM blog
-      WHERE source = 'digital-upstream'
+      WHERE source = 'digital-upstream' AND status = 'published'
       ORDER BY published_at DESC NULLS LAST
     `;
     return posts as BlogPostSummary[];

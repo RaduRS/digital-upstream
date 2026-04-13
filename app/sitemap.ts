@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const posts = await sql`
       SELECT slug, published_at, updated_at
       FROM blog
-      WHERE source = 'digital-upstream'
+      WHERE source = 'digital-upstream' AND status = 'published'
       ORDER BY published_at DESC NULLS LAST
     `;
     blogPosts = posts as typeof blogPosts;
