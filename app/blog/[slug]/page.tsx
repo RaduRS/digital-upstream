@@ -241,35 +241,6 @@ export default async function BlogPostPage({ params }: Props) {
           </Container>
         )}
 
-        {/* Secondary images */}
-        {post.secondary_image_url && (() => {
-          // Handle both array format ["url1","url2"] and object format {"key": "url"}
-          const urls: string[] = [];
-          if (Array.isArray(post.secondary_image_url)) {
-            urls.push(...post.secondary_image_url.filter(u => typeof u === "string"));
-          } else if (typeof post.secondary_image_url === "object") {
-            Object.values(post.secondary_image_url).forEach(v => {
-              if (typeof v === "string") urls.push(v);
-            });
-          }
-          if (urls.length === 0) return null;
-          return (
-            <section className="py-10 sm:py-14 border-t border-foreground/10">
-              <Container>
-                <div className="max-w-5xl mx-auto">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {urls.map((url, i) => (
-                      <div key={i} className="aspect-[16/9] overflow-hidden rounded-lg bg-foreground/5">
-                        <img src={url} alt="" className="w-full h-full object-cover" />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </Container>
-            </section>
-          );
-        })()}
-
         {/* Article footer */}
         <footer className="border-t border-foreground/10 py-12 sm:py-16">
           <Container>
