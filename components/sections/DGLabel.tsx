@@ -9,9 +9,16 @@ type DGLabelProps = {
 
 export default function DGLabel({ Icon, label, className }: DGLabelProps) {
   return (
-    <div aria-hidden={true} className={cn("mb-24 w-full flex items-center justify-end gap-2", className)}>
-      <Icon className="h-5 w-5" aria-hidden={true} />
-      <span className="text-sm tracking-wide">{label}</span>
+    <div
+      aria-hidden={true}
+      className={cn(
+        "mb-12 sm:mb-16 w-full flex items-center justify-end gap-3 small-caps text-foreground/55",
+        className,
+      )}
+    >
+      <span className="hairline max-w-[3rem] text-foreground/40" />
+      <Icon className="h-3.5 w-3.5" aria-hidden={true} />
+      <span>{label}</span>
     </div>
   );
 }

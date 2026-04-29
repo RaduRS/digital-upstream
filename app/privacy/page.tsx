@@ -40,7 +40,7 @@ export default function PrivacyPolicyPage() {
                 Terms of service
               </Link>
               <Link
-                href="/work#contact"
+                href="/#correspondence"
                 className="link-underline-rtl text-foreground"
               >
                 Contact

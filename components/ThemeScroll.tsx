@@ -5,7 +5,7 @@ import { useEffect } from "react";
 // Blends the global background from the base white toward near-black in real time
 // as the target section approaches the viewport top.
 export default function ThemeScroll({
-  targetSelector = "#black-section",
+  targetSelector = "#statement",
   maxPercent = 90,
   rangePx = 160,
   offsetPx = 0,

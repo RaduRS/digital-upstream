@@ -39,7 +39,7 @@ export default function TermsPage() {
                 Cookies policy
               </Link>
               <Link
-                href="/work#contact"
+                href="/#correspondence"
                 className="link-underline-rtl text-foreground"
               >
                 Contact

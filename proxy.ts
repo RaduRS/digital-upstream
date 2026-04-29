@@ -30,16 +30,6 @@ const createNonce = () => {
 };
 
 export function proxy(request: NextRequest) {
-  // Protect /admin routes (but allow /admin/login)
-  const { pathname } = request.nextUrl;
-  if (pathname.startsWith("/admin") && !pathname.startsWith("/admin/login")) {
-    const session = request.cookies.get("admin_session");
-    if (!session || session.value !== "ok") {
-      const loginUrl = new URL("/admin/login", request.url);
-      return NextResponse.redirect(loginUrl);
-    }
-  }
-
   const nonce = createNonce();
   const scriptSrc = [
     "'self'",
@@ -80,11 +70,6 @@ export function proxy(request: NextRequest) {
   const response = NextResponse.next({
     request: { headers: requestHeaders },
   });
-
-  // Noindex admin routes
-  if (pathname.startsWith("/admin")) {
-    response.headers.set("X-Robots-Tag", "noindex, nofollow");
-  }
 
   response.headers.set("Content-Security-Policy", csp);
   response.headers.set(

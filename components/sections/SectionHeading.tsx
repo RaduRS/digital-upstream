@@ -24,22 +24,29 @@ export default function SectionHeading({
 }: SectionHeadingProps) {
   const HeadingTag = as;
   return (
-    <div className={cn("heading-stack", align === "right" ? "heading-right" : "heading-left", className)}>
+    <div
+      className={cn(
+        "flex flex-col gap-5",
+        align === "right" ? "items-end text-right" : "items-start text-left",
+        className,
+      )}
+    >
       <HeadingTag
         id={id}
         className={cn(
-          "heading-title tracking-tight text-6xl sm:text-7xl lg:text-8xl font-bold",
-          align === "right" ? "text-right" : "text-left"
+          "display text-foreground",
+          align === "right" ? "text-right" : "text-left",
         )}
+        style={{ fontSize: "clamp(2.5rem, 6.4vw, 5.5rem)" }}
       >
         {title}
       </HeadingTag>
       {subtitle ? (
         <p
           className={cn(
-            "heading-subtitle text-xl sm:text-2xl opacity-80",
-            subtitleAlign === "right" ? "text-right" : "text-left",
-            subtitleClassName
+            "lede max-w-2xl",
+            subtitleAlign === "right" ? "text-right ml-auto" : "text-left",
+            subtitleClassName,
           )}
         >
           {subtitle}

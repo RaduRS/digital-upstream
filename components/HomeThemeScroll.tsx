@@ -36,15 +36,15 @@ export default function HomeThemeScroll() {
   return (
     <>
       <ThemeScroll
-        targetSelector="#black-section"
+        targetSelector="#statement"
         startVh={0.6}
-        endVh={0.68}
+        endVh={0.78}
         maxPercent={100}
       />
       <ThemeScroll
-        targetSelector="#projects"
-        rangePx={100}
-        offsetPx={-520}
+        targetSelector="#cases"
+        rangePx={140}
+        offsetPx={-560}
         fromPercent={100}
         toPercent={0}
         applyBeforeStart={false}
